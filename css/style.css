@@ -3,3 +3,16 @@
   width: 20px;
   border: 1px solid #000;
 }
+
+.inputborder-w{
+  border-color: #CB4335;
+}
+
+.inputborder-w:focus{
+  border-color: #CB4335;
+  box-shadow: #CB4335;
+}
+
+.inputborder-n{
+  border-color: #D6DBDF;
+}

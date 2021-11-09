@@ -42,7 +42,7 @@
 ?>
 
 <center>
-  <iframe src="https://www.google.com/maps/d/embed?mid=18ZUMdmSLrSvO11T4ays8QK3_Z26GjHgs" width="99%" height="400"></iframe>
+  <!-- <iframe src="https://www.google.com/maps/d/embed?mid=18ZUMdmSLrSvO11T4ays8QK3_Z26GjHgs" width="99%" height="400"></iframe> -->
 </center>
 
 <div class="container-fluid">
@@ -56,7 +56,7 @@
           <div class="col-sm">
               <div class="form-group">
                 <label>City</label>
-                <select class="form-control form-control-sm" id="CitySelect"">
+                <select class="form-control form-control-sm" id="CitySelect">
                   <option>Select City</option>
                   <?php
 
@@ -90,14 +90,14 @@
           <div class="col-sm">
               <div class="form-group">
                 <label>Cable Size</label>
-                <div id="CableSize"></div>
-                <!-- <input type="number" class="form-control form-control-sm" id="CableSize" placeholder="0" disabled> -->
+                <!-- <div id="CableSize"></div> -->
+                <input type="text" class="form-control form-control-sm" id="CableSize" placeholder="0" disabled>
               </div>
           </div>
           <div class="col-sm">
               <div class="form-group">
-                <label for="exampleFormControlInput1">Core No</label>
-                <input type="number" class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="1">
+                <label>Core No</label>
+                <input type="number" class="form-control form-control-sm" id="CoreNo" placeholder="1" max="0" min="1">
               </div>
           </div>
           <div class="col-sm">
@@ -237,9 +237,27 @@
       method:'POST',
       data:{Location_ID:LocationID},
       success:function(data){
-        $('#CableSize').html(data);
+        $('#CableSize').val(data);
+        $("#CoreNo").attr({
+           "max" : data,
+           "min" : 1
+        });
       }
     });
+  });
+
+  $(document).on('keydown', '#CoreNo', function(){
+    var max = document.getElementById('CoreNo').max;
+    var input = document.getElementById('CoreNo').value;
+    var id = document.getElementById('CoreNo');
+    if(input > max){
+      id.classList.add("inputborder-w");
+      id.classList.remove("inputborder-n");
+    }else{
+      id.classList.add("inputborder-n");
+      id.classList.remove("inputborder-w");
+    }
+    
   });
 
 </script>
