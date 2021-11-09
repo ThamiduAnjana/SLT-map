@@ -42,7 +42,7 @@
 ?>
 
 <center>
-  <!-- <iframe src="https://www.google.com/maps/d/embed?mid=18ZUMdmSLrSvO11T4ays8QK3_Z26GjHgs" width="99%" height="400"></iframe> -->
+  <iframe src="https://www.google.com/maps/d/embed?mid=18ZUMdmSLrSvO11T4ays8QK3_Z26GjHgs" width="99%" height="400"></iframe>
 </center>
 
 <div class="container-fluid">
@@ -55,11 +55,10 @@
         <div class="row">
           <div class="col-sm">
               <div class="form-group">
-                <label for="CitySelect">City</label>
-                <select class="form-control form-control-sm" id="CitySelect">
+                <label>City</label>
+                <select class="form-control form-control-sm" id="CitySelect"">
+                  <option>Select City</option>
                   <?php
-
-                    $Cityid = "";
 
                     //first query (that you want to select)
                     $query_one = "SELECT * FROM tb_city;";
@@ -78,38 +77,21 @@
                   ?>
 
                 </select>
-
-                <script type="text/javascript">
-                  
-                  $(document).on('change', '#CitySelect', function(){
-                    var CityID = document.getElementById('CitySelect').value;
-                    // alert(CityID);
-                    $.ajax({
-                      url:"actions/cityselect.php",
-                      method:"POST",
-                      data:{CityID:CityID},
-                      success:function(data){
-                        alert("hey");
-                        // $('#LocationSelect').html(data);
-                      }
-                    })
-                  });
-
-                </script>
-
               </div>
           </div>
           <div class="col-sm">
               <div class="form-group">
-                <label for="LocationSelect">Location</label>
+                <label>Location</label>
                 <select class="form-control form-control-sm" id="LocationSelect">
+                  <option>Select Location</option>
                 </select>
               </div>
           </div>
           <div class="col-sm">
               <div class="form-group">
-                <label for="exampleFormControlInput1">Cable Size</label>
-                <input type="number" class="form-control form-control-sm" id="exampleFormControlInput1" placeholder="256">
+                <label>Cable Size</label>
+                <div id="CableSize"></div>
+                <!-- <input type="number" class="form-control form-control-sm" id="CableSize" placeholder="0" disabled> -->
               </div>
           </div>
           <div class="col-sm">
@@ -231,6 +213,36 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+                  
+  $(document).on('change', '#CitySelect', function(){
+    var CityID = document.getElementById('CitySelect').value;
+    // alert(CityID);
+    $.ajax({
+      url:'actions/cityselect.php',
+      method:'POST',
+      data:{City_ID:CityID},
+      success:function(data){
+        $('#LocationSelect').html(data);
+      }
+    });
+  });
+
+  $(document).on('change', '#LocationSelect', function(){
+    var LocationID = document.getElementById('LocationSelect').value;
+    // alert(CityID);
+    $.ajax({
+      url:'actions/locationselect.php',
+      method:'POST',
+      data:{Location_ID:LocationID},
+      success:function(data){
+        $('#CableSize').html(data);
+      }
+    });
+  });
+
+</script>
 
 
 <?php include 'includes/footer.php' ?>
