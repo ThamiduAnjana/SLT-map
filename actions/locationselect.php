@@ -11,17 +11,11 @@
     //Add while loop for first column data display and after display next column
 
     if($result){
-        $row = mysqli_fetch_array($result)
+        $row = mysqli_fetch_array($result);
         //data
-        // echo $row['CableSize'];
-
-        ?>
-
-        <input type="number" class="form-control form-control-sm" id="CableSize" value="<?= $row['CableSize']?>" disabled>
-
-        <?php
+        $test = $row['CableSize'];
+        echo $test;
 
     }
-
     
 ?>
