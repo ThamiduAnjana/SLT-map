@@ -102,7 +102,7 @@
           </div>
           <div class="col-sm">
               <div class="form-group">
-                <label for="exampleFormControlInput1">Cable Size</label>
+                <label for="exampleFormControlInput1">Color Size</label>
                   <table>
                       <tr>
                         <td><input type="radio" name="color" value="#3498DB" /></td>
@@ -214,53 +214,8 @@
   </div>
 </div>
 
-<script type="text/javascript">
-                  
-  $(document).on('change', '#CitySelect', function(){
-    var CityID = document.getElementById('CitySelect').value;
-    // alert(CityID);
-    $.ajax({
-      url:'actions/cityselect.php',
-      method:'POST',
-      data:{City_ID:CityID},
-      success:function(data){
-        $('#LocationSelect').html(data);
-      }
-    });
-  });
 
-  $(document).on('change', '#LocationSelect', function(){
-    var LocationID = document.getElementById('LocationSelect').value;
-    // alert(CityID);
-    $.ajax({
-      url:'actions/locationselect.php',
-      method:'POST',
-      data:{Location_ID:LocationID},
-      success:function(data){
-        $('#CableSize').val(data);
-        $("#CoreNo").attr({
-           "max" : data,
-           "min" : 1
-        });
-      }
-    });
-  });
-
-  $(document).on('keydown', '#CoreNo', function(){
-    var max = document.getElementById('CoreNo').max;
-    var input = document.getElementById('CoreNo').value;
-    var id = document.getElementById('CoreNo');
-    if(input > max){
-      id.classList.add("inputborder-w");
-      id.classList.remove("inputborder-n");
-    }else{
-      id.classList.add("inputborder-n");
-      id.classList.remove("inputborder-w");
-    }
-    
-  });
-
-</script>
+<script type="text/javascript" src="js/custom_javascript.js"></script>
 
 
 <?php include 'includes/footer.php' ?>
