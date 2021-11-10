@@ -44,87 +44,175 @@
 	<nav>
 	  	<div class="nav nav-tabs" id="nav-tab" role="tablist">
 	    	<a class="nav-item nav-link active" id="nav-table-tab" data-toggle="tab" href="#nav-table" role="tab" aria-controls="nav-table" aria-selected="true">Details Table</a>
-	    	<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
-	    	<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+	    	<a class="nav-item nav-link" id="nav-AddNewData-tab" data-toggle="tab" href="#nav-AddNewData" role="tab" aria-controls="nav-AddNewData" aria-selected="false">Add New Data</a>
 	  	</div>
 	</nav>
 	<div class="tab-content" id="nav-tabContent">
 	  	<div class="tab-pane fade show active" id="nav-table" role="tabpanel" aria-labelledby="nav-table-tab">
 	  		<div class="card" style="width: 100%;">
 			  	<div class="card-body">
+			  		<div class="container">
+				        <!-- form -->
+				        <form>
+				          <div class="row">
+				            <!-- input city -->
+				            <div class="col-sm">
+				                <div class="form-group">
+				                  <label>City</label>
+				                  <select class="form-control form-control-sm" id="CitySelect">
+				                    <option>Select City</option>
+				                    <?php
+
+				                      //first query (that you want to select)
+				                      $query_one = "SELECT * FROM tb_city;";
+				                      //query execute
+				                      $result = mysqli_query($conn, $query_one);
+				                      //Add while loop for first column data display and after display next column
+				                      while ($row = mysqli_fetch_array($result)) {
+				                        //data
+				                        ?>
+
+				                          <option value="<?= $row['CityId'] ?>"><?php echo $row["CityId"], " | ", $row["City"]; ?></option>
+
+				                        <?php
+				                      }
+
+				                    ?>
+
+				                  </select>
+				                </div>
+				            </div>
+				            <!-- input location -->
+				            <div class="col-sm">
+				                <div class="form-group">
+				                  <label>Location</label>
+				                  <select class="form-control form-control-sm" id="LocationSelect">
+				                    <option>Select Location</option>
+				                  </select>
+				                </div>
+				            </div>
+				            <!-- input cable size -->
+				            <div class="col-sm">
+				                <div class="form-group">
+				                  <label>Cable Size</label>
+				                  <!-- <div id="CableSize"></div> -->
+				                  <input type="text" class="form-control form-control-sm" id="CableSize" placeholder="0" disabled>
+				                </div>
+				            </div>
+				            <!-- input core no -->
+				            <div class="col-sm">
+				                <div class="form-group">
+				                  <label>Core No</label>
+				                  <input type="number" class="form-control form-control-sm" id="CoreNo" placeholder="1" max="0" min="1">
+				                </div>
+				            </div>
+				            <!-- input color -->
+				            <div class="col-sm">
+				                <div class="form-group">
+				                  <label for="exampleFormControlInput1">Color Size</label>
+				                    <table>
+				                        <tr>
+				                          <td><input type="radio" name="color" value="#3498DB" /></td>
+				                          <td><input type="radio" name="color" value="#E67E22" /></td>
+				                          <td><input type="radio" name="color" value="#2ECC71" /></td>
+				                          <td><input type="radio" name="color" value="#A04000" /></td>
+				                          <td><input type="radio" name="color" value="#85929E" /></td>
+				                          <td><input type="radio" name="color" value="#FDFEFE" /></td>
+				                          <td><input type="radio" name="color" value="#E74C3C" /></td>
+				                          <td><input type="radio" name="color" value="#17202A" /></td>
+				                        </tr>
+				                        <tbody>
+				                          <tr>
+				                            <td><div class="color-box" style="background-color:#3498DB;"></div></td>
+				                            <td><div class="color-box" style="background-color:#E67E22;"></div></td>
+				                            <td><div class="color-box" style="background-color:#2ECC71;"></div></td>
+				                            <td><div class="color-box" style="background-color:#A04000;"></div></td>
+				                            <td><div class="color-box" style="background-color:#85929E;"></div></td>
+				                            <td><div class="color-box" style="background-color:#FDFEFE;"></div></td>
+				                            <td><div class="color-box" style="background-color:#E74C3C;"></div></td>
+				                            <td><div class="color-box" style="background-color:#17202A;"></div></td>
+				                          </tr>
+				                        </tbody>
+				                      </table>
+				                </div>
+				            </div>
+				            <!-- button search -->
+				            <div class="col-sm">
+				                <div class="form-group">
+				                  <label>Action</label><br>
+				                  <button type="submit" class="btn btn-primary" id="btn_submit"><i class="bi bi-search"></i> Search</button>
+				                </div>
+				            </div>
+				          </div>
+				        </form>
+				        <!-- form end -->
+				      </div>
 			  		<!-- table -->
-			      <div class="container-fluid" style="overflow: scroll;">
-			        <table class="table table-bordered">
-			          <thead>
-			            <tr>
-			              <th>Date</th>
-			              <th style="width:100px;">Core No</th>
-			              <th>Dist</th>
-			              <th>Loss</th>
-			              <th>Status</th>
-			              <th style="width:500px;">Remarks</th>
-			              <th>Status</th>
-			              <th>Loss</th>
-			              <th>Dist</th>
-			              <th style="width:100px;">Core No</th>
-			              <th>Date</th>
-			              <th bgcolor="#5DADE2" width="125px">Actions</th>
-			            </tr>
-			          </thead>
-			          <tbody>
-			            <tr>
-			              <?php
+				    <div class="container-fluid" style="overflow: scroll;">
+				       	<table class="table table-bordered">
+				          <thead>
+				            <tr>
+				              <th>Date</th>
+				              <th style="width:100px;">Core No</th>
+				              <th>Dist</th>
+				              <th>Loss</th>
+				              <th>Status</th>
+				              <th style="width:500px;">Remarks</th>
+				              <th>Status</th>
+				              <th>Loss</th>
+				              <th>Dist</th>
+				              <th style="width:100px;">Core No</th>
+				              <th>Date</th>
+				              <th bgcolor="#5DADE2" width="125px">Actions</th>
+				            </tr>
+				          </thead>
+				          <tbody>
+				            <tr>
+				              <?php
 
-			                //first query (that you want to select)
-			                $query_three = "SELECT * FROM tb_sender;";
-			                //query execute
-			                $result = mysqli_query($conn, $query_three);
-			                //Add while loop for first column data display and after display next column
-			                while ($row = mysqli_fetch_array($result)) {
-			                  //data
-			                  ?>
+				                //first query (that you want to select)
+				                $query_three = "SELECT * FROM tb_sender;";
+				                //query execute
+				                $result = mysqli_query($conn, $query_three);
+				                //Add while loop for first column data display and after display next column
+				                while ($row = mysqli_fetch_array($result)) {
+				                  //data
+				                  ?>
 
-			                    <td><?php echo $row["Date"]; ?></td>
-			                    <td><?php echo $row["Core_No"]; ?></td>
-			                    <td><?php echo $row["Distination"]; ?></td>
-			                    <td><?php echo $row["Loss"]; ?></td>
-			                    <td><?php echo $row["Status"]; ?></td>
-			                    <td><?php echo $row["Remarks"]; ?></td>
-			                    <td><?php echo $row["D_Status"]; ?></td>
-			                    <td><?php echo $row["D_Loss"]; ?></td>
-			                    <td><?php echo $row["D_Distination"]; ?></td>
-			                    <td><?php echo $row["D_Core_NO"]; ?></td>
-			                    <td><?php echo $row["D_Date"]; ?></td>
-			                    <td>
-			                    	<button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-			                    	&nbsp;
-			                    	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#UpdateModal"><i class="bi bi-arrow-counterclockwise"></i></button>
-			                    </td>
+				                    <td><?php echo $row["Date"]; ?></td>
+				                    <td><?php echo $row["Core_No"]; ?></td>
+				                    <td><?php echo $row["Distination"]; ?></td>
+				                    <td><?php echo $row["Loss"]; ?></td>
+				                    <td><?php echo $row["Status"]; ?></td>
+				                    <td><?php echo $row["Remarks"]; ?></td>
+				                    <td><?php echo $row["D_Status"]; ?></td>
+				                    <td><?php echo $row["D_Loss"]; ?></td>
+				                    <td><?php echo $row["D_Distination"]; ?></td>
+				                    <td><?php echo $row["D_Core_NO"]; ?></td>
+				                    <td><?php echo $row["D_Date"]; ?></td>
+				                    <td>
+				                    	<button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+				                    	&nbsp;
+				                    	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#UpdateModal"><i class="bi bi-arrow-counterclockwise"></i></button>
+				                    </td>
 
-			                  <?php
-			                }
+				                  <?php
+				                }
 
-			              ?>
-			            </tr>
-			          </tbody>
-			        </table>
-			      </div>
-			      <!-- table end -->
+				              ?>
+				            </tr>
+				          </tbody>
+				        </table>
+				    </div>
+			      	<!-- table end -->
 			  	</div>
 			</div>
 	  	</div>
-	  	<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+	  	<div class="tab-pane fade" id="nav-AddNewData" role="tabpanel" aria-labelledby="nav-AddNewData-tab">
 	  		<div class="card" style="width: 100%;">
-			  <div class="card-body">
+			  	<div class="card-body">
 			    	<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  </div>
-			</div>
-	  	</div>
-	  	<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-	  		<div class="card" style="width: 100%;">
-			  <div class="card-body">
-			    	<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-			  </div>
+			  	</div>
 			</div>
 	  	</div>
 	</div>
@@ -161,6 +249,9 @@
   </div>
 </div>
 <!-- modal end -->
+
+<!-- js -->
+<script type="text/javascript" src="../js/custom_javascript_1.js"></script>
 
 <!-- footer -->
 <?php include 'footer_1.php' ?>
