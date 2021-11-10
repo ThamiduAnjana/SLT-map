@@ -18,19 +18,22 @@
 
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">SLT-Map</a>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <form method="POST" action="../actions/signout.php" name="SignoutForm">
-	    <button class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#SigninModal">
-	    	<i class="bi bi-person-bounding-box"></i> [<?php echo $id; ?>] Signout
-	    </button>
-    </form>
-  </div>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    	<span class="navbar-toggler-icon"></span>
+  	</button>
+	<a class="navbar-brand" href="#">SLT-Map</a>
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      	<li class="nav-item active">
+	        	<a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+	      	</li>
+	    </ul>
+	    <form method="POST" action="../actions/signout.php" name="SignoutForm">
+		    <button class="btn btn-outline-danger my-2 my-sm-0" data-toggle="modal" data-target="#SigninModal">
+		    	<i class="bi bi-person-bounding-box"></i> [<?php echo $id; ?>] Signout
+		    </button>
+	    </form>
+	</div>
 </nav>
 <!-- navbar end -->
 
