@@ -211,9 +211,158 @@
 	  	<div class="tab-pane fade" id="nav-AddNewData" role="tabpanel" aria-labelledby="nav-AddNewData-tab">
 	  		<div class="card" style="width: 100%;">
 			  	<div class="card-body">
-			    	<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			  		<div class="row">
+			  			<div class="col-sm">
+				  			<div class="form-group">
+					      	<label>City</label>
+					      	<select class="form-control form-control-sm" id="inputCitySelect">
+					        	<option>Select City</option>
+					        	<?php
+
+					          	//first query (that you want to select)
+					          	$query_one = "SELECT * FROM tb_city;";
+					          	//query execute
+					          	$result = mysqli_query($conn, $query_one);
+					          	//Add while loop for first column data display and after display next column
+					          	while ($row = mysqli_fetch_array($result)) {
+					            	//data
+					            	?>
+
+					              	<option value="<?= $row['CityId'] ?>"><?php echo $row["CityId"], " | ", $row["City"]; ?></option>
+
+					            	<?php
+					          	}
+
+					        	?>
+
+					      	</select>
+					    	</div>
+			  			</div>
+			  			<div class="col-sm">
+				      	<div class="form-group">
+				        	<label>Location</label>
+				        	<select class="form-control form-control-sm" id="inputLocationSelect">
+				          	<option>Select Location</option>
+				        	</select>
+				      	</div>
+				    	</div>
+			  		</div>
 			  	</div>
-			</div>
+			  </div>
+	  		<div class="card" style="width: 100%;">
+			  	<div class="card-body">
+			    	<form>
+			    	 	<div class="row">
+	    					<div class="col-6">
+
+	      					<div class="form-group">
+    								<label>Date</label>
+    								<input type="text" class="form-control" id="InputDate" placeholder="Enter Date">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Core_No</label>
+    								<input type="text" class="form-control" id="InputCore_No" placeholder="Enter Core_No">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Destination</label>
+    								<input type="text" class="form-control" id="InputDestination" placeholder="Enter Destination">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Loss</label>
+    								<input type="text" class="form-control" id="InputLoss" placeholder="Enter Loss">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Status</label>
+    								<input type="text" class="form-control" id="InputStatus" placeholder="Enter Status">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Remarks</label>
+    								<textarea class="form-control" id="InputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+    								<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
+  								</div>
+
+  								<div class="form-group">
+	    							<label>CoreColor</label>
+	    							<select class="form-control" id="InputColor">
+	      							<option value="#3498DB">Blue</option>
+	      							<option value="#E67E22">Orange</option>
+	      							<option value="#2ECC71">Green</option>
+	      							<option value="#A04000">Brown</option>
+	      							<option value="#85929E">Gray</option>
+	      							<option value="#FDFEFE">White</option>
+	      							<option value="#E74C3C">Red</option>
+	      							<option value="#17202A">Black</option>
+	    							</select>
+  								</div>
+
+	    					</div>
+
+	    					<div class="col-6">
+
+	      					<div class="form-group">
+    								<label>Des.Date</label>
+    								<input type="text" class="form-control" id="DInputDate" placeholder="Enter Date">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Des.Core_No</label>
+    								<input type="text" class="form-control" id="DInputCore_No" placeholder="Enter Core_No">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Des.Destination</label>
+    								<input type="text" class="form-control" id="DInputDestination" placeholder="Enter Destination">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Des.Loss</label>
+    								<input type="text" class="form-control" id="DInputLoss" placeholder="Enter Loss">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Des.Status</label>
+    								<input type="text" class="form-control" id="DInputStatus" placeholder="Enter Status">
+  								</div>
+
+  								<div class="form-group">
+    								<label>Des.Remarks</label>
+    								<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
+    								<textarea class="form-control" id="DInputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+  								</div>
+
+  								<div class="form-group">
+	    							<label>Des.CoreColor</label>
+	    							<select class="form-control" id="DInputColor">
+	      							<option value="#3498DB">Blue</option>
+	      							<option value="#E67E22">Orange</option>
+	      							<option value="#2ECC71">Green</option>
+	      							<option value="#A04000">Brown</option>
+	      							<option value="#85929E">Gray</option>
+	      							<option value="#FDFEFE">White</option>
+	      							<option value="#E74C3C">Red</option>
+	      							<option value="#17202A">Black</option>
+	    							</select>
+  								</div>
+
+	    					</div>
+
+	  					</div>
+
+	  					<br>
+
+	  					<center>
+	  						<input type="reset" class="btn btn-danger " value="Clear" style="width: 150px;height: 50px;" />
+	  						<button type="button" class="btn btn-success" style="width: 150px;height: 50px;" >Save</button>
+							</center>
+
+						</form>
+			  	</div>
+				</div>
 	  	</div>
 	</div>
 </div>
