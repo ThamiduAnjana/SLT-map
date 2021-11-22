@@ -39,6 +39,26 @@
 </nav>
 <!-- navbar end -->
 
+<!-- alert -->
+<?php
+  if (isset($_SESSION["status"])) {
+    ?>
+      <br>
+      <div class="container">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Hey! : </strong><?php echo $_SESSION["status"]; ?>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      </div>
+
+    <?php
+    unset($_SESSION["status"]);
+  }
+?>
+<!-- alert end -->
+
 <!-- tab -->
 <div class="container-fluid">
 	<nav>
@@ -87,7 +107,7 @@
 				                <div class="form-group">
 				                  <label>Location</label>
 				                  <select class="form-control form-control-sm" id="LocationSelect">
-				                    <option>Select Location</option>
+				                    <option value="0">Select Location</option>
 				                  </select>
 				                </div>
 				            </div>
@@ -241,7 +261,7 @@
 			  			<div class="col-sm">
 				      	<div class="form-group">
 				        	<label>Location</label>
-				        	<select class="form-control form-control-sm" id="inputLocationSelect">
+				        	<select class="form-control form-control-sm" name="inputLocationSelect" id="inputLocationSelect">
 				          	<option>Select Location</option>
 				        	</select>
 				      	</div>
@@ -251,44 +271,44 @@
 			  </div>
 	  		<div class="card" style="width: 100%;">
 			  	<div class="card-body">
-			    	<form>
+			    	<form method="POST" action="">
 			    	 	<div class="row">
 	    					<div class="col-6">
 
 	      					<div class="form-group">
     								<label>Date</label>
-    								<input type="text" class="form-control" id="InputDate" placeholder="Enter Date">
+    								<input type="text" class="form-control" name="InputDate" id="InputDate" placeholder="Enter Date">
   								</div>
 
   								<div class="form-group">
     								<label>Core_No</label>
-    								<input type="text" class="form-control" id="InputCore_No" placeholder="Enter Core_No">
+    								<input type="text" class="form-control" name="InputCore_No" id="InputCore_No" placeholder="Enter Core_No">
   								</div>
 
   								<div class="form-group">
     								<label>Destination</label>
-    								<input type="text" class="form-control" id="InputDestination" placeholder="Enter Destination">
+    								<input type="text" class="form-control" name="InputDestination" id="InputDestination" placeholder="Enter Destination">
   								</div>
 
   								<div class="form-group">
     								<label>Loss</label>
-    								<input type="text" class="form-control" id="InputLoss" placeholder="Enter Loss">
+    								<input type="text" class="form-control" name="InputLoss" id="InputLoss" placeholder="Enter Loss">
   								</div>
 
   								<div class="form-group">
     								<label>Status</label>
-    								<input type="text" class="form-control" id="InputStatus" placeholder="Enter Status">
+    								<input type="text" class="form-control" name="InputStatus" id="InputStatus" placeholder="Enter Status">
   								</div>
 
   								<div class="form-group">
     								<label>Remarks</label>
-    								<textarea class="form-control" id="InputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+    								<textarea class="form-control" name="InputRemarks" id="InputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
     								<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
   								</div>
 
   								<div class="form-group">
 	    							<label>CoreColor</label>
-	    							<select class="form-control" id="InputColor">
+	    							<select class="form-control" name="InputColor" id="InputColor">
 	      							<option value="#3498DB">Blue</option>
 	      							<option value="#E67E22">Orange</option>
 	      							<option value="#2ECC71">Green</option>
@@ -306,38 +326,38 @@
 
 	      					<div class="form-group">
     								<label>Des.Date</label>
-    								<input type="text" class="form-control" id="DInputDate" placeholder="Enter Date">
+    								<input type="text" class="form-control" name="DInputDate" id="DInputDate" placeholder="Enter Date">
   								</div>
 
   								<div class="form-group">
     								<label>Des.Core_No</label>
-    								<input type="text" class="form-control" id="DInputCore_No" placeholder="Enter Core_No">
+    								<input type="text" class="form-control" name="DInputCore_No" id="DInputCore_No" placeholder="Enter Core_No">
   								</div>
 
   								<div class="form-group">
     								<label>Des.Destination</label>
-    								<input type="text" class="form-control" id="DInputDestination" placeholder="Enter Destination">
+    								<input type="text" class="form-control" name="DInputDestination" id="DInputDestination" placeholder="Enter Destination">
   								</div>
 
   								<div class="form-group">
     								<label>Des.Loss</label>
-    								<input type="text" class="form-control" id="DInputLoss" placeholder="Enter Loss">
+    								<input type="text" class="form-control" name="DInputLoss" id="DInputLoss" placeholder="Enter Loss">
   								</div>
 
   								<div class="form-group">
     								<label>Des.Status</label>
-    								<input type="text" class="form-control" id="DInputStatus" placeholder="Enter Status">
+    								<input type="text" class="form-control" name="DInputStatus" id="DInputStatus" placeholder="Enter Status">
   								</div>
 
   								<div class="form-group">
     								<label>Des.Remarks</label>
     								<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
-    								<textarea class="form-control" id="DInputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+    								<textarea class="form-control" name="DInputRemarks" id="DInputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
   								</div>
 
   								<div class="form-group">
 	    							<label>Des.CoreColor</label>
-	    							<select class="form-control" id="DInputColor">
+	    							<select class="form-control" name="DInputColor" id="DInputColor">
 	      							<option value="#3498DB">Blue</option>
 	      							<option value="#E67E22">Orange</option>
 	      							<option value="#2ECC71">Green</option>
@@ -357,7 +377,8 @@
 
 	  					<center>
 	  						<input type="reset" class="btn btn-danger " value="Clear" style="width: 150px;height: 50px;" />
-	  						<button type="button" class="btn btn-success" style="width: 150px;height: 50px;" >Save</button>
+	  						<input type="submit" class="btn btn-success " value="Save" style="width: 150px;height: 50px;" />
+	  						<!-- <button type="button" class="btn btn-success" style="width: 150px;height: 50px;" >Save</button> -->
 							</center>
 
 						</form>
