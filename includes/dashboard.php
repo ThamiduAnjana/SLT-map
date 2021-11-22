@@ -271,7 +271,7 @@
 			  </div>
 	  		<div class="card" style="width: 100%;">
 			  	<div class="card-body">
-			    	<form method="POST" action="">
+			    	<form method="POST" action="../actions/insertdata.php">
 			    	 	<div class="row">
 	    					<div class="col-6">
 
