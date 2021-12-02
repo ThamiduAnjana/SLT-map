@@ -65,6 +65,7 @@
 	  	<div class="nav nav-tabs" id="nav-tab" role="tablist">
 	    	<a class="nav-item nav-link active" id="nav-table-tab" data-toggle="tab" href="#nav-table" role="tab" aria-controls="nav-table" aria-selected="true">Details Table</a>
 	    	<a class="nav-item nav-link" id="nav-AddNewData-tab" data-toggle="tab" href="#nav-AddNewData" role="tab" aria-controls="nav-AddNewData" aria-selected="false">Add New Data</a>
+	    	<a class="nav-item nav-link" id="nav-AddNewCity-tab" data-toggle="tab" href="#nav-AddNewCity" role="tab" aria-controls="nav-AddNewCity" aria-selected="false">Add New City & Location</a>
 	  	</div>
 	</nav>
 	<div class="tab-content" id="nav-tabContent">
@@ -224,9 +225,31 @@
 				          </tbody>
 				        </table>
 				    </div>
-			      	<!-- table end -->
+			      <!-- table end -->
+			      <br>
+			      <center>
+				      <nav aria-label="Page navigation example">
+							  <ul class="pagination">
+							    <li class="page-item">
+							      <a class="page-link" href="#" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							        <span class="sr-only">Previous</span>
+							      </a>
+							    </li>
+							    <li class="page-item"><a class="page-link" href="#">1</a></li>
+							    <li class="page-item"><a class="page-link" href="#">2</a></li>
+							    <li class="page-item"><a class="page-link" href="#">3</a></li>
+							    <li class="page-item">
+							      <a class="page-link" href="#" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							        <span class="sr-only">Next</span>
+							      </a>
+							    </li>
+							  </ul>
+							</nav>
+						</center>
 			  	</div>
-			</div>
+				</div>
 	  	</div>
 	  	<div class="tab-pane fade" id="nav-AddNewData" role="tabpanel" aria-labelledby="nav-AddNewData-tab">
 	  		<div class="card" style="width: 100%;">
@@ -384,6 +407,11 @@
 						</form>
 			  	</div>
 				</div>
+	  	</div>
+	  	<div class="tab-pane fade" id="nav-AddNewCity" role="tabpanel" aria-labelledby="nav-AddNewCity-tab">
+	  		<div class="card" style="width: 100%;">
+	  			hi
+	  		</div>
 	  	</div>
 	</div>
 </div>
