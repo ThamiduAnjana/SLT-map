@@ -170,60 +170,58 @@
 				      </div>
 			  		<!-- table -->
 				    <div class="container-fluid" style="overflow: scroll;">
-				       	<table class="table table-bordered">
-				          <thead>
+				      <table class="table table-bordered">
+				        <tr>
+				          <th>Date</th>
+				          <th style="width:100px;">Core No</th>
+				          <th>Dist</th>
+				          <th>Loss</th>
+				          <th>Status</th>
+				          <th style="width:500px;">Remarks</th>
+				          <th>Status</th>
+				          <th>Loss</th>
+				          <th>Dist</th>
+				          <th style="width:100px;">Core No</th>
+				          <th>Date</th>
+				          <th bgcolor="#5DADE2" width="125px">Actions</th>
+				        </tr>
+				        <tbody>
+				        <?php
+
+				          //first query (that you want to select)
+				          $query_three = "SELECT * FROM tb_sender;";
+				          //query execute
+				          $result = mysqli_query($conn, $query_three);
+				          //Add while loop for first column data display and after display next column
+				          while ($row = mysqli_fetch_array($result)) {
+				            //data
+				        ?>
+
 				            <tr>
-				              <th>Date</th>
-				              <th style="width:100px;">Core No</th>
-				              <th>Dist</th>
-				              <th>Loss</th>
-				              <th>Status</th>
-				              <th style="width:500px;">Remarks</th>
-				              <th>Status</th>
-				              <th>Loss</th>
-				              <th>Dist</th>
-				              <th style="width:100px;">Core No</th>
-				              <th>Date</th>
-				              <th bgcolor="#5DADE2" width="125px">Actions</th>
+					            <td><?php echo $row["Date"]; ?></td>
+					            <td><?php echo $row["Core_No"]; ?></td>
+					            <td><?php echo $row["Distination"]; ?></td>
+					            <td><?php echo $row["Loss"]; ?></td>
+					            <td><?php echo $row["Status"]; ?></td>
+					            <td><?php echo $row["Remarks"]; ?></td>
+					            <td><?php echo $row["D_Status"]; ?></td>
+					            <td><?php echo $row["D_Loss"]; ?></td>
+					            <td><?php echo $row["D_Distination"]; ?></td>
+					            <td><?php echo $row["D_Core_NO"]; ?></td>
+					            <td><?php echo $row["D_Date"]; ?></td>
+					            <td>
+					              <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+					              &nbsp;
+					              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#UpdateModal"><i class="bi bi-arrow-counterclockwise"></i></button>
+					            </td>
 				            </tr>
-				          </thead>
-				          <tbody>
-				            <tr>
-				              <?php
 
-				                //first query (that you want to select)
-				                $query_three = "SELECT * FROM tb_sender;";
-				                //query execute
-				                $result = mysqli_query($conn, $query_three);
-				                //Add while loop for first column data display and after display next column
-				                while ($row = mysqli_fetch_array($result)) {
-				                  //data
-				                  ?>
+				        <?php
+				          }
 
-				                    <td><?php echo $row["Date"]; ?></td>
-				                    <td><?php echo $row["Core_No"]; ?></td>
-				                    <td><?php echo $row["Distination"]; ?></td>
-				                    <td><?php echo $row["Loss"]; ?></td>
-				                    <td><?php echo $row["Status"]; ?></td>
-				                    <td><?php echo $row["Remarks"]; ?></td>
-				                    <td><?php echo $row["D_Status"]; ?></td>
-				                    <td><?php echo $row["D_Loss"]; ?></td>
-				                    <td><?php echo $row["D_Distination"]; ?></td>
-				                    <td><?php echo $row["D_Core_NO"]; ?></td>
-				                    <td><?php echo $row["D_Date"]; ?></td>
-				                    <td>
-				                    	<button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
-				                    	&nbsp;
-				                    	<button type="button" class="btn btn-success" data-toggle="modal" data-target="#UpdateModal"><i class="bi bi-arrow-counterclockwise"></i></button>
-				                    </td>
-
-				                  <?php
-				                }
-
-				              ?>
-				            </tr>
-				          </tbody>
-				        </table>
+				        ?>
+				        </tbody>
+				      </table>
 				    </div>
 			      <!-- table end -->
 			      <br>
