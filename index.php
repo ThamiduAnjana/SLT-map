@@ -172,18 +172,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <?php
+            <?php
 
-                //first query (that you want to select)
-                $query_three = "SELECT * FROM tb_sender;";
-                //query execute
-                $result = mysqli_query($conn, $query_three);
-                //Add while loop for first column data display and after display next column
-                while ($row = mysqli_fetch_array($result)) {
-                  //data
-                  ?>
+              //first query (that you want to select)
+              $query_three = "SELECT * FROM tb_sender;";
+              //query execute
+              $result = mysqli_query($conn, $query_three);
+              //Add while loop for first column data display and after display next column
+              while ($row = mysqli_fetch_array($result)) {
+                //data
+                ?>
 
+                  <tr>
                     <td><?php echo $row["Date"]; ?></td>
                     <td><?php echo $row["Core_No"]; ?></td>
                     <td><?php echo $row["Distination"]; ?></td>
@@ -195,12 +195,12 @@
                     <td><?php echo $row["D_Distination"]; ?></td>
                     <td><?php echo $row["D_Core_NO"]; ?></td>
                     <td><?php echo $row["D_Date"]; ?></td>
+                  </tr>
+                  
+                <?php
+              }
 
-                  <?php
-                }
-
-              ?>
-            </tr>
+            ?>
           </tbody>
         </table>
       </div>
