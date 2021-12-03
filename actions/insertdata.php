@@ -1,5 +1,7 @@
 <?php
 
+	session_start();
+
 	require_once("../db/connection.php");
 
 	$LocationID = $_POST['inputLocationSelect'];
@@ -20,7 +22,7 @@
 	$DInputRemarks = $_POST['DInputRemarks'];
 	$DInputColor = $_POST['DInputColor'];
 
-	if($InputDate = "" && $InputCore_No = "" && $InputDestination = "" && $InputLoss = "" && $InputStatus = "" && $InputRemarks = "" && $InputColor = "" && $DInputDate = "" && $DInputCore_No = "" && $DInputDestination = "" && $DInputLoss = "" && $DInputStatus = "" && $DInputRemarks = "" && $DInputColor = "" && $LocationID){
+	if(!isset($InputDate) || !isset($InputCore_No) || !isset($InputDestination) || !isset($InputLoss) || !isset($InputStatus) || !isset($InputRemarks) || !isset($InputColor) || !isset($DInputDate) || !isset($DInputCore_No) || !isset($DInputDestination) || !isset($DInputLoss) || !isset($DInputStatus) || !isset($DInputRemarks) || !isset($DInputColor) || !isset($LocationID)){
 		$_SESSION["status"] = "Empty Values.. Please enter your data.";
 		header('location: ../index.php');
 	}else{
@@ -31,7 +33,7 @@
 	    	$_SESSION["status"] = "Successfully inserted.";
 	    	header('location: ../index.php');
 	    }else{
-	    	$_SESSION["status"] = "Fail.";
+	    	$_SESSION["status"] = "Insert failed.";
 	    	header('location: ../index.php');
     	}
 	}
