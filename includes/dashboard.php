@@ -170,7 +170,7 @@
 				      </div>
 			  		<!-- table -->
 				    <div class="container-fluid" style="overflow: scroll;">
-				      <table class="table table-bordered">
+				      <table class="table table-bordered table-sm">
 				        <tr>
 				          <th>Date</th>
 				          <th style="width:100px;">Core No</th>
@@ -399,7 +399,6 @@
 	  					<center>
 	  						<input type="reset" class="btn btn-danger " value="Clear" style="width: 150px;height: 50px;" />
 	  						<input type="submit" class="btn btn-success " value="Save" style="width: 150px;height: 50px;" />
-	  						<!-- <button type="button" class="btn btn-success" style="width: 150px;height: 50px;" >Save</button> -->
 							</center>
 
 						</form>
@@ -408,7 +407,70 @@
 	  	</div>
 	  	<div class="tab-pane fade" id="nav-AddNewCity" role="tabpanel" aria-labelledby="nav-AddNewCity-tab">
 	  		<div class="card" style="width: 100%;">
-	  			hi
+	  			<br>
+	  			<div class="container-fluid">
+	  				<div class="row">
+	  					<div class="col-lg-6" style="border-right: 3px solid black;margin-bottom: 15px;">
+	  						<form>
+		  						<div class="form-group">
+								    <label>City ID</label>
+								    <input type="number" class="form-control" id="InputCityID" placeholder="0">
+								  </div>
+		  						<div class="form-group">
+								    <label>City</label>
+								    <input type="text" class="form-control" id="InputCity" placeholder="Enter City Name">
+								  </div>
+								  <br>
+			  					<center>
+			  						<input type="reset" class="btn btn-danger " value="Clear" style="width: 150px;height: 50px;margin: 2px;" />
+			  						<input type="submit" class="btn btn-success " value="Save" style="width: 150px;height: 50px;margin: 2px;" />
+									</center>
+								</form>
+								<br>
+	  					</div>
+	  					<div class="col-lg-6">
+	  						<form>
+	  							<div class="form-group">
+				            <label>City</label>
+				            <select class="form-control form-control-sm" id="CitySelect">
+				              <option>Select City</option>
+				              <?php
+
+				                //first query (that you want to select)
+				                $query_one = "SELECT * FROM tb_city;";
+				                //query execute
+				                $result = mysqli_query($conn, $query_one);
+				                //Add while loop for first column data display and after display next column
+				                while ($row = mysqli_fetch_array($result)) {
+				                //data
+				              ?>
+
+				                  <option value="<?= $row['CityId'] ?>"><?php echo $row["CityId"], " | ", $row["City"]; ?></option>
+
+				              <?php
+				                }
+
+				              ?>
+
+				            </select>
+				          </div>
+	  							<div class="form-group">
+								    <label>Location ID</label>
+								    <input type="number" class="form-control" id="InputLocationID" placeholder="0">
+								  </div>
+		  						<div class="form-group">
+								    <label>Location</label>
+								    <input type="text" class="form-control" id="InputLocation" placeholder="Enter Location Name">
+								  </div>
+								  <br>
+			  					<center>
+			  						<input type="reset" class="btn btn-danger " value="Clear" style="width: 150px;height: 50px;margin: 2px;" />
+			  						<input type="submit" class="btn btn-success " value="Save" style="width: 150px;height: 50px;margin: 2px;" />
+									</center>
+	  						</form>
+	  					</div>
+	  				</div>
+	  			</div>
 	  		</div>
 	  	</div>
 	</div>
