@@ -410,8 +410,8 @@
 	  			<br>
 	  			<div class="container-fluid">
 	  				<div class="row">
-	  					<div class="col-lg-6" style="border-right: 3px solid black;margin-bottom: 15px;">
-	  						<form>
+	  					<div class="col-lg-6" style="border-right: 2px solid black;margin-bottom: 15px;">
+	  						<form method="POST" action="../actions/insertcity.php">
 		  						<div class="form-group">
 								    <label>City ID</label>
 								    <?php
@@ -424,11 +424,11 @@
 				              $row = mysqli_fetch_array($result);
 				              $Cityid = $row['CityId'] + 1;
 				            ?>
-								    <input type="number" class="form-control" id="InputCityID" placeholder="0" value="<?= $Cityid ?>" disabled>
+								    <input type="number" class="form-control" name="InputCityID" id="InputCityID" value="<?= $Cityid ?>" disabled>
 								  </div>
 		  						<div class="form-group">
 								    <label>City</label>
-								    <input type="text" class="form-control" id="InputCity" placeholder="Enter City Name">
+								    <input type="text" class="form-control" name="InputCity" id="InputCity" placeholder="Enter City Name">
 								  </div>
 								  <br>
 			  					<center>
@@ -439,11 +439,11 @@
 								<br>
 	  					</div>
 	  					<div class="col-lg-6">
-	  						<form>
+	  						<form method="POST" action="../actions/insertlocations.php">
 	  							<div class="form-group">
 				            <label>City</label>
-				            <select class="form-control form-control-sm" id="CitySelect">
-				              <option>Select City</option>
+				            <select class="form-control form-control-sm" name="CitySelect" id="CitySelect">
+				              <option value="0">Select City</option>
 				              <?php
 
 				                //first query (that you want to select)
@@ -466,17 +466,32 @@
 				          </div>
 	  							<div class="form-group">
 								    <label>Location ID</label>
-								    <input type="number" class="form-control" id="InputLocationID" placeholder="0">
+								    <?php
+
+				              //first query (that you want to select)
+				              $query_one = "SELECT LocationID FROM tb_locations ORDER BY LocationID DESC LIMIT 1";
+				              //query execute
+				              $result = mysqli_query($conn, $query_one);
+				              //Add while loop for first column data display and after display next column
+				              $row = mysqli_fetch_array($result);
+				              $LocationId= $row['LocationID'] + 1;
+				            ?>
+								    <input type="number" class="form-control" name="InputLocationID" id="InputLocationID" value="<?= $LocationId ?>" disabled>
 								  </div>
 		  						<div class="form-group">
 								    <label>Location</label>
-								    <input type="text" class="form-control" id="InputLocation" placeholder="Enter Location Name">
+								    <input type="text" class="form-control" name="InputLocation" id="InputLocation" placeholder="Enter Location Name">
+								  </div>
+								  <div class="form-group">
+								    <label>Cable Size</label>
+								    <input type="number" class="form-control" name="InputCableSize" id="InputCableSize" placeholder="256">
 								  </div>
 								  <br>
 			  					<center>
 			  						<input type="reset" class="btn btn-danger " value="Clear" style="width: 150px;height: 50px;margin: 2px;" />
 			  						<input type="submit" class="btn btn-success " value="Save" style="width: 150px;height: 50px;margin: 2px;" />
 									</center>
+									<br>
 	  						</form>
 	  					</div>
 	  				</div>
