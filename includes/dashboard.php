@@ -414,7 +414,17 @@
 	  						<form>
 		  						<div class="form-group">
 								    <label>City ID</label>
-								    <input type="number" class="form-control" id="InputCityID" placeholder="0">
+								    <?php
+
+				              //first query (that you want to select)
+				              $query_one = "SELECT CityId FROM tb_city ORDER BY CityId DESC LIMIT 1";
+				              //query execute
+				              $result = mysqli_query($conn, $query_one);
+				              //Add while loop for first column data display and after display next column
+				              $row = mysqli_fetch_array($result);
+				              $Cityid = $row['CityId'] + 1;
+				            ?>
+								    <input type="number" class="form-control" id="InputCityID" placeholder="0" value="<?= $Cityid ?>" disabled>
 								  </div>
 		  						<div class="form-group">
 								    <label>City</label>
