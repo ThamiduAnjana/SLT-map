@@ -173,16 +173,17 @@
 				      <table class="table table-bordered table-sm">
 				        <tr>
 				          <th>Date</th>
-				          <th style="width:100px;">Core No</th>
+				          <th style="width:70px;">Core</th>
 				          <th>Dist</th>
 				          <th>Loss</th>
 				          <th>Status</th>
-				          <th style="width:500px;">Remarks</th>
-				          <th>Status</th>
-				          <th>Loss</th>
-				          <th>Dist</th>
-				          <th style="width:100px;">Core No</th>
-				          <th>Date</th>
+				          <th style="width:400px;">Remarks</th>
+				          <th style="width:400px;">D.Remarks</th>
+				          <th>D.Status</th>
+				          <th>D.Loss</th>
+				          <th>D.Dist</th>
+				          <th style="width:70px;">D.Core</th>
+				          <th>D.Date</th>
 				          <th bgcolor="#5DADE2" width="125px">Actions</th>
 				        </tr>
 				        <tbody>
@@ -202,9 +203,10 @@
 					            <td><?php echo $row["Core_No"]; ?></td>
 					            <td><?php echo $row["Distination"]; ?></td>
 					            <td><?php echo $row["Loss"]; ?></td>
-					            <td><?php echo $row["Status"]; ?></td>
+					            <td><?php echo $row["Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['CoreColor'];?>;"></div></td>
 					            <td><?php echo $row["Remarks"]; ?></td>
-					            <td><?php echo $row["D_Status"]; ?></td>
+					            <td><?php echo $row["D_Remarks"]; ?></td>
+					            <td><?php echo $row["D_Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['D_CoreColor'];?>;"></div></td>
 					            <td><?php echo $row["D_Loss"]; ?></td>
 					            <td><?php echo $row["D_Distination"]; ?></td>
 					            <td><?php echo $row["D_Core_NO"]; ?></td>
@@ -504,28 +506,152 @@
 
 <!-- modal -->
 <div class="modal fade" tabindex="-1" role="dialog" id="UpdateModal">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Administrator Sign in</h5>
+        <h5 class="modal-title">Update Data</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="POST" name="FUpdateorm" action="actions/updatedata.php">
+      <form method="POST" name="Updateform" action="../actions/updatedata.php">
         <div class="modal-body">
-          <div class="form-group">
-            <label for="id">User ID</label>
-            <input type="number" class="form-control" name="InputID" id="InputID" placeholder="Enter id">
-          </div>
-          <div class="form-group">
-            <label for="Password">Password</label>
-            <input type="password" class="form-control" name="InputPassword" id="InputPassword" placeholder="Password">
-          </div>
+          <div class="row">
+			  		<div class="col-sm">
+				  		<div class="form-group">
+					      <label>City</label>
+					      <select class="form-control form-control-sm" id="inputCitySelect">
+					        <option>Select City</option>
+					        <?php
+
+					          //first query (that you want to select)
+					          $query_one = "SELECT * FROM tb_city;";
+					          //query execute
+					          $result = mysqli_query($conn, $query_one);
+					          //Add while loop for first column data display and after display next column
+					          while ($row = mysqli_fetch_array($result)) {
+					            //data
+					        ?>
+
+					          	<option value="<?= $row['CityId'] ?>"><?php echo $row["CityId"], " | ", $row["City"]; ?></option>
+
+					        <?php
+
+					          }
+
+					        ?>
+
+					      </select>
+					    </div>
+			  		</div>
+			  		<div class="col-sm">
+				      <div class="form-group">
+				        <label>Location</label>
+				        <select class="form-control form-control-sm" name="inputLocationSelect" id="inputLocationSelect">
+				          <option>Select Location</option>
+				        </select>
+				      </div>
+				    </div>
+			  	</div>
+			  	<div class="row">
+	    			<div class="col-6">
+
+	      			<div class="form-group">
+    						<label>Date</label>
+    						<input type="date" class="form-control" name="InputDate" id="InputDate" placeholder="Enter Date">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Core_No</label>
+    						<input type="text" class="form-control" name="InputCore_No" id="InputCore_No" placeholder="Enter Core_No">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Destination</label>
+    						<input type="text" class="form-control" name="InputDestination" id="InputDestination" placeholder="Enter Destination">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Loss</label>
+    						<input type="text" class="form-control" name="InputLoss" id="InputLoss" placeholder="Enter Loss">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Status</label>
+    						<input type="text" class="form-control" name="InputStatus" id="InputStatus" placeholder="Enter Status">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Remarks</label>
+    						<textarea class="form-control" name="InputRemarks" id="InputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+    						<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
+  						</div>
+
+  						<div class="form-group">
+	    					<label>CoreColor</label>
+	    					<select class="form-control" name="InputColor" id="InputColor">
+	      					<option value="#3498DB">Blue</option>
+	      					<option value="#E67E22">Orange</option>
+	      					<option value="#2ECC71">Green</option>
+	      					<option value="#A04000">Brown</option>
+	      					<option value="#85929E">Gray</option>
+	      					<option value="#FDFEFE">White</option>
+	      					<option value="#E74C3C">Red</option>
+	      					<option value="#17202A">Black</option>
+	    					</select>
+  						</div>
+	    			</div>
+	    			<div class="col-6">
+							<div class="form-group">
+    						<label>Des.Date</label>
+    						<input type="date" class="form-control" name="DInputDate" id="DInputDate" placeholder="Enter Date">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Des.Core_No</label>
+    						<input type="text" class="form-control" name="DInputCore_No" id="DInputCore_No" placeholder="Enter Core_No">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Des.Destination</label>
+    						<input type="text" class="form-control" name="DInputDestination" id="DInputDestination" placeholder="Enter Destination">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Des.Loss</label>
+    						<input type="text" class="form-control" name="DInputLoss" id="DInputLoss" placeholder="Enter Loss">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Des.Status</label>
+    						<input type="text" class="form-control" name="DInputStatus" id="DInputStatus" placeholder="Enter Status">
+  						</div>
+
+  						<div class="form-group">
+    						<label>Des.Remarks</label>
+    						<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
+    						<textarea class="form-control" name="DInputRemarks" id="DInputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+  						</div>
+
+  						<div class="form-group">
+	    					<label>Des.CoreColor</label>
+	    					<select class="form-control" name="DInputColor" id="DInputColor">
+	      					<option value="#3498DB">Blue</option>
+	      					<option value="#E67E22">Orange</option>
+	      					<option value="#2ECC71">Green</option>
+	      					<option value="#A04000">Brown</option>
+	      					<option value="#85929E">Gray</option>
+	      					<option value="#FDFEFE">White</option>
+	      					<option value="#E74C3C">Red</option>
+	      					<option value="#17202A">Black</option>
+	    					</select>
+  						</div>
+	    			</div>
+	  			</div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Sign in</button>
+          <button type="submit" class="btn btn-success">Update Data</button>
         </div>
       </form>
     </div>
