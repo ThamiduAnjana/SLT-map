@@ -155,20 +155,21 @@
       </div>
       <!-- table -->
       <div class="container-fluid" style="overflow: scroll;">
-        <table class="table table-bordered">
+        <table class="table table-bordered table-sm">
           <thead>
             <tr>
               <th>Date</th>
-              <th style="width:100px;">Core No</th>
+              <th style="width:70px;">Core</th>
               <th>Dist</th>
               <th>Loss</th>
               <th>Status</th>
-              <th style="width:500px;">Remarks</th>
-              <th>Status</th>
-              <th>Loss</th>
-              <th>Dist</th>
-              <th style="width:100px;">Core No</th>
-              <th>Date</th>
+              <th style="width:400px;">Remarks</th>
+              <th style="width:400px;">D.Remarks</th>
+              <th>D.Status</th>
+              <th>D.Loss</th>
+              <th>D.Dist</th>
+              <th style="width:70px;">D.Core</th>
+              <th>D.Date</th>
             </tr>
           </thead>
           <tbody>
@@ -188,15 +189,16 @@
                     <td><?php echo $row["Core_No"]; ?></td>
                     <td><?php echo $row["Distination"]; ?></td>
                     <td><?php echo $row["Loss"]; ?></td>
-                    <td><?php echo $row["Status"]; ?></td>
+                    <td><?php echo $row["Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['CoreColor'];?>;"></div></td>
                     <td><?php echo $row["Remarks"]; ?></td>
-                    <td><?php echo $row["D_Status"]; ?></td>
+                    <td><?php echo $row["D_Remarks"]; ?></td>
+                    <td><?php echo $row["D_Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['D_CoreColor'];?>;"></div></td>
                     <td><?php echo $row["D_Loss"]; ?></td>
                     <td><?php echo $row["D_Distination"]; ?></td>
                     <td><?php echo $row["D_Core_NO"]; ?></td>
                     <td><?php echo $row["D_Date"]; ?></td>
                   </tr>
-                  
+
                 <?php
               }
 
