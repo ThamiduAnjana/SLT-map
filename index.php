@@ -5,6 +5,14 @@
   include 'includes/header.php';
   require_once("db/connection.php");
 
+  // $page = 0;
+
+  if(isset($_GET['page'])){
+    $page = $_GET['page'];
+  }else{
+    $page = 1;
+  }
+
 ?>
 <!-- import end -->
 
@@ -118,14 +126,14 @@
                   <label for="exampleFormControlInput1">Color Size</label>
                     <table>
                         <tr>
-                          <td><input type="radio" name="color" value="#3498DB" /></td>
-                          <td><input type="radio" name="color" value="#E67E22" /></td>
-                          <td><input type="radio" name="color" value="#2ECC71" /></td>
-                          <td><input type="radio" name="color" value="#A04000" /></td>
-                          <td><input type="radio" name="color" value="#85929E" /></td>
-                          <td><input type="radio" name="color" value="#FDFEFE" /></td>
-                          <td><input type="radio" name="color" value="#E74C3C" /></td>
-                          <td><input type="radio" name="color" value="#17202A" /></td>
+                          <td><input type="radio" name="color" id="color" value="#3498DB" /></td>
+                          <td><input type="radio" name="color" id="color" value="#E67E22" /></td>
+                          <td><input type="radio" name="color" id="color" value="#2ECC71" /></td>
+                          <td><input type="radio" name="color" id="color" value="#A04000" /></td>
+                          <td><input type="radio" name="color" id="color" value="#85929E" /></td>
+                          <td><input type="radio" name="color" id="color" value="#FDFEFE" /></td>
+                          <td><input type="radio" name="color" id="color" value="#E74C3C" /></td>
+                          <td><input type="radio" name="color" id="color" value="#17202A" /></td>
                         </tr>
                         <tbody>
                           <tr>
@@ -146,7 +154,7 @@
             <div class="col-sm">
                 <div class="form-group">
                   <label>Action</label><br>
-                  <button type="submit" class="btn btn-primary" id="btn_submit"><i class="bi bi-search"></i> Search</button>
+                  <button type="submit" class="btn btn-primary" id="btn_search"><i class="bi bi-search"></i> Search</button>
                 </div>
             </div>
           </div>
@@ -173,40 +181,106 @@
             </tr>
           </thead>
           <tbody>
-            <?php
+              <?php
 
-              //first query (that you want to select)
-              $query_three = "SELECT * FROM tb_sender;";
-              //query execute
-              $result = mysqli_query($conn, $query_three);
-              //Add while loop for first column data display and after display next column
-              while ($row = mysqli_fetch_array($result)) {
-                //data
-                ?>
+                $num_per_page = 10;
+                $start_from = ($page - 1)*10;
+                // echo $start_from." ".$num_per_page;
 
-                  <tr>
-                    <td><?php echo $row["Date"]; ?></td>
-                    <td><?php echo $row["Core_No"]; ?></td>
-                    <td><?php echo $row["Distination"]; ?></td>
-                    <td><?php echo $row["Loss"]; ?></td>
-                    <td><?php echo $row["Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['CoreColor'];?>;"></div></td>
-                    <td><?php echo $row["Remarks"]; ?></td>
-                    <td><?php echo $row["D_Remarks"]; ?></td>
-                    <td><?php echo $row["D_Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['D_CoreColor'];?>;"></div></td>
-                    <td><?php echo $row["D_Loss"]; ?></td>
-                    <td><?php echo $row["D_Distination"]; ?></td>
-                    <td><?php echo $row["D_Core_NO"]; ?></td>
-                    <td><?php echo $row["D_Date"]; ?></td>
-                  </tr>
+                //three query (that you want to select)
+                $query_three = "SELECT * FROM tb_sender limit $start_from,$num_per_page";
+                //query execute
+                $resultt = mysqli_query($conn, $query_three);
+                //Add while loop for column data display and after display next column
+                while ($row = mysqli_fetch_assoc($resultt)) {
+                  //data
+                  ?>
 
-                <?php
-              }
+                    <tr>
+                      <td><?php echo $row["Date"]; ?></td>
+                      <td><?php echo $row["Core_No"]; ?></td>
+                      <td><?php echo $row["Distination"]; ?></td>
+                      <td><?php echo $row["Loss"]; ?></td>
+                      <td>
+                        <?php echo $row["Status"]; 
+                          if(isset($row['CoreColor'])){
+                            echo "<div class='color-box' style='background-color:".$row['CoreColor']."'></div>";
+                          }
+                        ?>
+                      </td>
+                      <td><?php echo $row["Remarks"]; ?></td>
+                      <td><?php echo $row["D_Remarks"]; ?></td>
+                      <td>
+                        <?php echo $row["D_Status"]; 
+                          if(isset($row['D_CoreColor'])){
+                            echo "<div class='color-box' style='background-color:".$row['D_CoreColor']."'></div>";
+                          }
+                        ?> 
+                      </td>
+                      <td><?php echo $row["D_Loss"]; ?></td>
+                      <td><?php echo $row["D_Distination"]; ?></td>
+                      <td><?php echo $row["D_Core_NO"]; ?></td>
+                      <td><?php echo $row["D_Date"]; ?></td>
+                    </tr>
 
-            ?>
-          </tbody>
+                  <?php
+                }
+
+              ?>
+            </tbody>
         </table>
       </div>
       <!-- table end -->
+      <br>
+      <?php 
+
+        //4 query (that you want to select)
+        $query_f = "SELECT * FROM tb_sender;";
+        //query execute
+        $resultf = mysqli_query($conn, $query_f);
+        //get number of rows
+        $tot_records = mysqli_num_rows($resultf);
+
+        $tot_page = ceil($tot_records/$num_per_page);
+        // echo $tot_records." ".$tot_page;
+
+      ?>
+      <center>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <?php 
+
+              if($page>1){
+                echo "<li class='page-item'>
+                        <a class='page-link' href='index.php?page=".($page-1)."' aria-label='Previous'>
+                          <span aria-hidden='true'>&laquo;</span>
+                          <span class='sr-only'>Previous</span>
+                        </a>
+                      </li>";
+              }
+
+
+              for($i=1; $i<=$tot_page;$i++){
+
+                echo "<li class='page-item'><a class='page-link' href='index.php?page=".$i."'>$i</a></li>";
+                
+              }
+
+              if(($i-1)>$page){
+                echo "<li class='page-item'>
+                        <a class='page-link' href='index.php?page=".($page + 1)."' aria-label='Next'>
+                          <span aria-hidden='true'>&raquo;</span>
+                          <span class='sr-only'>Next</span>
+                        </a>
+                      </li>";
+              }
+
+              // echo $i." ".$page;
+
+            ?>
+          </ul>
+        </nav>
+      </center>
     </div>
   </div>
 </div>
@@ -240,6 +314,20 @@
   </div>
 </div>
 <!-- modal end -->
+
+<script type="text/javascript">
+  
+$(document).on('click','#btn_search',function(){
+
+  var locationid = document.getElementById('LocationSelect').value;
+  var coreno = document.getElementById('CoreNo').value;
+  var color = document.querySelector('input[name = "color"]:checked');
+
+  alert(color.value+" "+coreno+" "+locationid);
+});
+
+</script>
+
 
 <!-- js -->
 <script type="text/javascript" src="js/custom_javascript.js"></script>
