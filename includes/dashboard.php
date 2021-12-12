@@ -13,6 +13,12 @@
 
 	$id = $_SESSION['id'];
 
+	if(isset($_GET['page'])){
+    $page = $_GET['page'];
+  }else{
+    $page = 1;
+  }
+
 	include 'header_1.php';
 
 ?>
@@ -189,8 +195,12 @@
 				        <tbody>
 				        <?php
 
+				        	$num_per_page = 10;
+	                $start_from = ($page - 1)*10;
+	                // echo $start_from." ".$num_per_page;
+
 				          //first query (that you want to select)
-				          $query_three = "SELECT * FROM tb_sender;";
+				          $query_three = "SELECT * FROM tb_sender limit $start_from,$num_per_page;";
 				          //query execute
 				          $result = mysqli_query($conn, $query_three);
 				          //Add while loop for first column data display and after display next column
@@ -300,27 +310,55 @@
 				    </div>
 			      <!-- table end -->
 			      <br>
+			      <?php 
+
+			        //4 query (that you want to select)
+			        $query_f = "SELECT * FROM tb_sender;";
+			        //query execute
+			        $resultf = mysqli_query($conn, $query_f);
+			        //get number of rows
+			        $tot_records = mysqli_num_rows($resultf);
+
+			        $tot_page = ceil($tot_records/$num_per_page);
+			        // echo $tot_records." ".$tot_page;
+
+			      ?>
 			      <center>
-				      <nav aria-label="Page navigation example">
-							  <ul class="pagination">
-							    <li class="page-item">
-							      <a class="page-link" href="#" aria-label="Previous">
-							        <span aria-hidden="true">&laquo;</span>
-							        <span class="sr-only">Previous</span>
-							      </a>
-							    </li>
-							    <li class="page-item"><a class="page-link" href="#">1</a></li>
-							    <li class="page-item"><a class="page-link" href="#">2</a></li>
-							    <li class="page-item"><a class="page-link" href="#">3</a></li>
-							    <li class="page-item">
-							      <a class="page-link" href="#" aria-label="Next">
-							        <span aria-hidden="true">&raquo;</span>
-							        <span class="sr-only">Next</span>
-							      </a>
-							    </li>
-							  </ul>
-							</nav>
-						</center>
+			        <nav aria-label="Page navigation example">
+			          <ul class="pagination">
+			            <?php 
+
+			              if($page>1){
+			                echo "<li class='page-item'>
+			                        <a class='page-link' href='dashboard.php?page=".($page-1)."' aria-label='Previous'>
+			                          <span aria-hidden='true'>&laquo;</span>
+			                          <span class='sr-only'>Previous</span>
+			                        </a>
+			                      </li>";
+			              }
+
+
+			              for($i=1; $i<=$tot_page;$i++){
+
+			                echo "<li class='page-item'><a class='page-link' href='dashboard.php?page=".$i."'>$i</a></li>";
+			                
+			              }
+
+			              if(($i-1)>$page){
+			                echo "<li class='page-item'>
+			                        <a class='page-link' href='dashboard.php?page=".($page + 1)."' aria-label='Next'>
+			                          <span aria-hidden='true'>&raquo;</span>
+			                          <span class='sr-only'>Next</span>
+			                        </a>
+			                      </li>";
+			              }
+
+			              // echo $i." ".$page;
+
+			            ?>
+			          </ul>
+			        </nav>
+			      </center>
 			  	</div>
 				</div>
 	  	</div>
