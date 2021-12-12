@@ -196,25 +196,98 @@
 				          //Add while loop for first column data display and after display next column
 				          while ($row = mysqli_fetch_array($result)) {
 				            //data
+				            $ID = $row['ID'];
+				            $S_Date = $row["Date"];
+				            $S_Core_No = $row["Core_No"];
+				            $S_Distination = $row["Distination"];
+										$S_Loss = $row["Loss"];
+										$S_Status = $row["Status"];
+										$S_CoreColor = $row['CoreColor'];
+										$S_Remarks = $row["Remarks"];
+										$D_Remarks = $row["D_Remarks"];
+										$D_Status = $row["D_Status"];
+										$D_CoreColor = $row['D_CoreColor'];
+										$D_Loss = $row["D_Loss"];
+										$D_Distination = $row["D_Distination"];
+										$D_Core_NO = $row["D_Core_NO"];
+										$D_Date = $row["D_Date"];
+
+										//Get Location ID
+										$Get_LocationId = $row['LocationID'];// Location ID *
+
+										//Find Location name
+					          $query_location = "SELECT * FROM tb_locations WHERE LocationID = $Get_LocationId;";
+					          //query execute
+					          $L_result = mysqli_query($conn, $query_location);
+					          //get Data
+					          $L_row = mysqli_fetch_array($L_result);
+					          //data
+					          $GetLocation_Name = $L_row['Location'];// Location Name *
+					          //Get City ID
+					          $GetCity_ID = $L_row['CityID'];// City ID *
+
+					          //Find Location name
+					          $query_city = "SELECT * FROM tb_city WHERE CityId = $GetCity_ID;";
+					          //query execute
+					          $C_result = mysqli_query($conn, $query_city);
+					          //get Data
+					          $C_row = mysqli_fetch_array($C_result);
+					          //data
+					          $GetCity_Name = $C_row['City'];// City Name *
+
 				        ?>
 
 				            <tr>
-					            <td><?php echo $row["Date"]; ?></td>
-					            <td><?php echo $row["Core_No"]; ?></td>
-					            <td><?php echo $row["Distination"]; ?></td>
-					            <td><?php echo $row["Loss"]; ?></td>
-					            <td><?php echo $row["Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['CoreColor'];?>;"></div></td>
-					            <td><?php echo $row["Remarks"]; ?></td>
-					            <td><?php echo $row["D_Remarks"]; ?></td>
-					            <td><?php echo $row["D_Status"]; ?> <div class="color-box" style="background-color:<?php echo $row['D_CoreColor'];?>;"></div></td>
-					            <td><?php echo $row["D_Loss"]; ?></td>
-					            <td><?php echo $row["D_Distination"]; ?></td>
-					            <td><?php echo $row["D_Core_NO"]; ?></td>
-					            <td><?php echo $row["D_Date"]; ?></td>
+					            <td><?= $S_Date ?></td>
+					            <td><?= $S_Core_No ?></td>
+					            <td><?= $S_Distination ?></td>
+					            <td><?= $S_Loss ?></td>
 					            <td>
-					              <button type="button" class="btn btn-danger"><i class="bi bi-trash-fill"></i></button>
+	                      <?= $S_Status; 
+	                        if(isset($S_CoreColor)){
+	                          echo "<div class='color-box' style='background-color:".$S_CoreColor."'></div>";
+	                        }
+	                      ?>
+	                    </td>
+					            <td><?= $S_Remarks ?></td>
+					            <td><?= $D_Remarks ?></td>
+					            <td>
+	                      <?= $D_Status; 
+	                        if(isset($D_CoreColor)){
+	                          echo "<div class='color-box' style='background-color:".$D_CoreColor."'></div>";
+	                        }
+	                      ?> 
+	                    </td>
+					            <td><?= $D_Loss ?></td>
+					            <td><?= $D_Distination ?></td>
+					            <td><?= $D_Core_NO ?></td>
+					            <td><?= $D_Date ?></td>
+					            <td>
+					              <button type="button" class="btn btn-danger" onclick="DeleteDetails(<?= $ID ?>);"><i class="bi bi-trash-fill"></i></button>
 					              &nbsp;
-					              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#UpdateModal"><i class="bi bi-arrow-counterclockwise"></i></button>
+					              <button type="button" class="btn btn-success" id="btn_Update" 
+					              	onclick="
+					              		UpdateDetails(
+					              			'<?= $ID ?>',
+					              			'<?= $GetCity_ID ?>',
+					              			'<?= $Get_LocationId ?>',
+					              			'<?= $S_Date ?>',
+					              			'<?= $S_Core_No ?>',
+					              			'<?= $S_Distination ?>',
+					              			'<?= $S_Loss ?>',
+					              			'<?= $S_Status ?>',
+					              			'<?= $S_CoreColor ?>',
+					              			'<?= $S_Remarks ?>',
+					              			'<?= $D_Remarks ?>',
+					              			'<?= $D_Status ?>',
+					              			'<?= $D_CoreColor ?>',
+					              			'<?= $D_Loss ?>',
+					              			'<?= $D_Distination ?>',
+					              			'<?= $D_Core_NO ?>',
+					              			'<?= $D_Date ?>'
+					              		);">
+					              	<i class="bi bi-arrow-counterclockwise"></i>
+					              </button><!-- data-toggle="modal" data-target="#UpdateModal" -->
 					            </td>
 				            </tr>
 
@@ -517,10 +590,11 @@
       <form method="POST" name="Updateform" action="../actions/updatedata.php">
         <div class="modal-body">
           <div class="row">
+          	<input type="text" name="inputid" id="inputid" hidden>
 			  		<div class="col-sm">
 				  		<div class="form-group">
 					      <label>City</label>
-					      <select class="form-control form-control-sm" id="inputCitySelect">
+					      <select class="form-control form-control-sm" id="M_inputCitySelect">
 					        <option>Select City</option>
 					        <?php
 
@@ -547,7 +621,7 @@
 			  		<div class="col-sm">
 				      <div class="form-group">
 				        <label>Location</label>
-				        <select class="form-control form-control-sm" name="inputLocationSelect" id="inputLocationSelect">
+				        <select class="form-control form-control-sm" name="M_inputLocationSelect" id="M_inputLocationSelect">
 				          <option>Select Location</option>
 				        </select>
 				      </div>
@@ -558,38 +632,38 @@
 
 	      			<div class="form-group">
     						<label>Date</label>
-    						<input type="date" class="form-control" name="InputDate" id="InputDate" placeholder="Enter Date">
+    						<input type="date" class="form-control" name="M_InputDate" id="M_InputDate" placeholder="Enter Date">
   						</div>
 
   						<div class="form-group">
     						<label>Core_No</label>
-    						<input type="text" class="form-control" name="InputCore_No" id="InputCore_No" placeholder="Enter Core_No">
+    						<input type="text" class="form-control" name="M_InputCore_No" id="M_InputCore_No" placeholder="Enter Core_No">
   						</div>
 
   						<div class="form-group">
     						<label>Destination</label>
-    						<input type="text" class="form-control" name="InputDestination" id="InputDestination" placeholder="Enter Destination">
+    						<input type="text" class="form-control" name="M_InputDestination" id="M_InputDestination" placeholder="Enter Destination">
   						</div>
 
   						<div class="form-group">
     						<label>Loss</label>
-    						<input type="text" class="form-control" name="InputLoss" id="InputLoss" placeholder="Enter Loss">
+    						<input type="text" class="form-control" name="M_InputLoss" id="M_InputLoss" placeholder="Enter Loss">
   						</div>
 
   						<div class="form-group">
     						<label>Status</label>
-    						<input type="text" class="form-control" name="InputStatus" id="InputStatus" placeholder="Enter Status">
+    						<input type="text" class="form-control" name="M_InputStatus" id="M_InputStatus" placeholder="Enter Status">
   						</div>
 
   						<div class="form-group">
     						<label>Remarks</label>
-    						<textarea class="form-control" name="InputRemarks" id="InputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+    						<textarea class="form-control" name="M_InputRemarks" id="M_InputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
     						<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
   						</div>
 
   						<div class="form-group">
 	    					<label>CoreColor</label>
-	    					<select class="form-control" name="InputColor" id="InputColor">
+	    					<select class="form-control" name="M_InputColor" id="M_InputColor">
 	      					<option value="#3498DB">Blue</option>
 	      					<option value="#E67E22">Orange</option>
 	      					<option value="#2ECC71">Green</option>
@@ -604,38 +678,38 @@
 	    			<div class="col-6">
 							<div class="form-group">
     						<label>Des.Date</label>
-    						<input type="date" class="form-control" name="DInputDate" id="DInputDate" placeholder="Enter Date">
+    						<input type="date" class="form-control" name="M_DInputDate" id="M_DInputDate" placeholder="Enter Date">
   						</div>
 
   						<div class="form-group">
     						<label>Des.Core_No</label>
-    						<input type="text" class="form-control" name="DInputCore_No" id="DInputCore_No" placeholder="Enter Core_No">
+    						<input type="text" class="form-control" name="M_DInputCore_No" id="M_DInputCore_No" placeholder="Enter Core_No">
   						</div>
 
   						<div class="form-group">
     						<label>Des.Destination</label>
-    						<input type="text" class="form-control" name="DInputDestination" id="DInputDestination" placeholder="Enter Destination">
+    						<input type="text" class="form-control" name="M_DInputDestination" id="M_DInputDestination" placeholder="Enter Destination">
   						</div>
 
   						<div class="form-group">
     						<label>Des.Loss</label>
-    						<input type="text" class="form-control" name="DInputLoss" id="DInputLoss" placeholder="Enter Loss">
+    						<input type="text" class="form-control" name="M_DInputLoss" id="M_DInputLoss" placeholder="Enter Loss">
   						</div>
 
   						<div class="form-group">
     						<label>Des.Status</label>
-    						<input type="text" class="form-control" name="DInputStatus" id="DInputStatus" placeholder="Enter Status">
+    						<input type="text" class="form-control" name="M_DInputStatus" id="M_DInputStatus" placeholder="Enter Status">
   						</div>
 
   						<div class="form-group">
     						<label>Des.Remarks</label>
     						<!-- <input type="text" class="form-control" id="InputRemarks" placeholder="Enter Remarks"> -->
-    						<textarea class="form-control" name="DInputRemarks" id="DInputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
+    						<textarea class="form-control" name="M_DInputRemarks" id="M_DInputRemarks" rows="3" placeholder="Enter Remarks"></textarea>
   						</div>
 
   						<div class="form-group">
 	    					<label>Des.CoreColor</label>
-	    					<select class="form-control" name="DInputColor" id="DInputColor">
+	    					<select class="form-control" name="M_DInputColor" id="M_DInputColor">
 	      					<option value="#3498DB">Blue</option>
 	      					<option value="#E67E22">Orange</option>
 	      					<option value="#2ECC71">Green</option>
@@ -658,6 +732,83 @@
   </div>
 </div>
 <!-- modal end -->
+
+<script type="text/javascript">
+  
+function UpdateDetails(
+		ID,
+		City_Name,
+		Location_Name,
+		S_Date,
+		S_Core_No,
+		S_Distination,
+		S_Loss,
+		S_Status,
+		S_CoreColor,
+		S_Remarks,
+		D_Remarks,
+		D_Status,
+		D_CoreColor,
+		D_Loss,
+		D_Distination,
+		D_Core_NO,
+		D_Date
+	){
+
+	 console.log(
+  	ID,
+  	City_Name,
+  	Location_Name,
+  	S_Date,
+  	S_Core_No,
+		S_Distination,
+		S_Loss,
+		S_Status,
+		S_CoreColor,
+		S_Remarks,
+		D_Remarks,
+		D_Status,
+		D_CoreColor,
+		D_Loss,
+		D_Distination,
+		D_Core_NO,
+		D_Date
+  );
+
+  $('#UpdateModal').modal('show');
+  $('#M_inputCitySelect').val(City_Name);
+  $('#M_inputLocationSelect').val(Location_Name);
+  $('#inputid').val(ID);
+  $('#M_InputDate').val(S_Date);
+  $('#M_InputCore_No').val(S_Core_No);
+  $('#M_InputDestination').val(S_Distination);
+  $('#M_InputLoss').val(S_Loss);
+  $('#M_InputStatus').val(S_Status);
+  if(S_CoreColor !== null){
+  	$('#M_InputColor').val(S_CoreColor);
+  } 
+  $('#M_InputRemarks').val(S_Remarks);
+  $('#M_DInputRemarks').val(D_Remarks);
+  $('#M_DInputStatus').val(D_Status);
+  if(D_CoreColor !== null){
+  	$('#M_DInputColor').val(D_CoreColor);
+  }
+  $('#M_DInputLoss').val(D_Loss);
+  $('#M_DInputDestination').val(D_Distination);
+  $('#M_DInputCore_No').val(D_Core_NO);
+  $('#M_DInputDate').val(D_Date);
+
+};
+
+function DeleteDetails(ID){
+	if(confirm("Delete this data ( "+ID+" ) ? And are you sure?")){
+		//code
+	}else{
+		//code
+	}
+};
+
+</script>
 
 <!-- js -->
 <script type="text/javascript" src="../js/custom_javascript_1.js"></script>
