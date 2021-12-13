@@ -841,6 +841,15 @@ function UpdateDetails(
 function DeleteDetails(ID){
 	if(confirm("Delete this data ( "+ID+" ) ? And are you sure?")){
 		//code
+		$.ajax({
+      url:'../actions/deletedata.php',
+      method:'POST',
+      data:{Data_ID:ID},
+      success:function(data){
+	      console.log(data);
+	      location.reload();
+	    }
+    });
 	}else{
 		//code
 	}
