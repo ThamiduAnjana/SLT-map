@@ -16,22 +16,34 @@
     //Add while loop for first column data display and after display next column
     while ($row = mysqli_fetch_assoc($result)) {
         //data
-        echo "
-        <tr>
-            <td>".$row["Date"]."</td>
-            <td>".$row["Core_No"]."</td>
-            <td>".$row["Distination"]."</td>
-            <td>".$row["Loss"]."</td>
-            <td>".$row["Status"]."</td>
-            <td>".$row["Remarks"]."</td>
-            <td>".$row["D_Remarks"]."</td>
-            <td>".$row["D_Status"]."</td>
-            <td>".$row["D_Loss"]."</td>
-            <td>".$row["D_Distination"]."</td>
-            <td>".$row["D_Core_NO"]."</td>
-            <td>".$row["D_Date"]."</td>
-        </tr>
-        ";
+        $val1 = "<tr>
+                <td>".$row["Date"]."</td>
+                <td>".$row["Core_No"]."</td>
+                <td>".$row["Distination"]."</td>
+                <td>".$row["Loss"]."</td>
+                <td>".$row["Status"];
+
+        if(isset($row['CoreColor'])){
+            $val1 .= "<div class='color-box' style='background-color:".$row['CoreColor']."'></div>";
+        };
+
+        $val1 .= "</td>
+                <td>".$row["Remarks"]."</td>
+                <td>".$row["D_Remarks"]."</td>
+                <td>".$row["D_Status"];
+
+        if(isset($row['D_CoreColor'])){
+            $val1 .= "<div class='color-box' style='background-color:".$row['D_CoreColor']."'></div>";
+        };  
+
+        $val1 .= "</td>
+                <td>".$row["D_Loss"]."</td>
+                <td>".$row["D_Distination"]."</td>
+                <td>".$row["D_Core_NO"]."</td>
+                <td>".$row["D_Date"]."</td>
+                </tr>";
+
+        echo $val1;
 
     }
 ?>
