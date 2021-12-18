@@ -66,8 +66,6 @@
         <h5 class="card-title">Details Table</h5>
       </center>
       <div class="container">
-        <!-- form -->
-        <form>
           <div class="row">
             <!-- input city -->
             <div class="col-sm">
@@ -122,45 +120,47 @@
             </div>
             <!-- input color -->
             <div class="col-sm">
-                <div class="form-group">
-                  <label>Color Size</label>
-                    <table>
-                        <tr>
-                          <td><input type="radio" name="color" id="color" value="#3498DB" /></td>
-                          <td><input type="radio" name="color" id="color" value="#E67E22" /></td>
-                          <td><input type="radio" name="color" id="color" value="#2ECC71" /></td>
-                          <td><input type="radio" name="color" id="color" value="#A04000" /></td>
-                          <td><input type="radio" name="color" id="color" value="#85929E" /></td>
-                          <td><input type="radio" name="color" id="color" value="#FDFEFE" /></td>
-                          <td><input type="radio" name="color" id="color" value="#E74C3C" /></td>
-                          <td><input type="radio" name="color" id="color" value="#17202A" /></td>
-                        </tr>
-                        <tbody>
-                          <tr>
-                            <td><div class="color-box" style="background-color:#3498DB;"></div></td>
-                            <td><div class="color-box" style="background-color:#E67E22;"></div></td>
-                            <td><div class="color-box" style="background-color:#2ECC71;"></div></td>
-                            <td><div class="color-box" style="background-color:#A04000;"></div></td>
-                            <td><div class="color-box" style="background-color:#85929E;"></div></td>
-                            <td><div class="color-box" style="background-color:#FDFEFE;"></div></td>
-                            <td><div class="color-box" style="background-color:#E74C3C;"></div></td>
-                            <td><div class="color-box" style="background-color:#17202A;"></div></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
+              <div class="form-group">
+                <label>Color Size</label>
+                <!-- form -->
+                <form>
+                  <table>
+                    <tr>
+                      <td><input type="radio" name="color" value="#3498DB" /></td>
+                      <td><input type="radio" name="color" value="#E67E22" /></td>
+                      <td><input type="radio" name="color" value="#2ECC71" /></td>
+                      <td><input type="radio" name="color" value="#A04000" /></td>
+                      <td><input type="radio" name="color" value="#85929E" /></td>
+                      <td><input type="radio" name="color" value="#FDFEFE" /></td>
+                      <td><input type="radio" name="color" value="#E74C3C" /></td>
+                      <td><input type="radio" name="color" value="#17202A" /></td>
+                    </tr>
+                    <tbody>
+                      <tr>
+                        <td><div class="color-box" style="background-color:#3498DB;"></div></td>
+                        <td><div class="color-box" style="background-color:#E67E22;"></div></td>
+                        <td><div class="color-box" style="background-color:#2ECC71;"></div></td>
+                        <td><div class="color-box" style="background-color:#A04000;"></div></td>
+                        <td><div class="color-box" style="background-color:#85929E;"></div></td>
+                        <td><div class="color-box" style="background-color:#FDFEFE;"></div></td>
+                        <td><div class="color-box" style="background-color:#E74C3C;"></div></td>
+                        <td><div class="color-box" style="background-color:#17202A;"></div></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+                <!-- form end -->
+              </div>
             </div>
             <!-- button search -->
             <div class="col-sm">
                 <div class="form-group">
                   <label>Action</label><br>
-                  <!-- <button class="btn btn-primary" id="btn_search"><i class="bi bi-search"></i> Search</button> -->
-                  <button id="btn_search">search</button>
+                  <button class="btn btn-primary btn-sm" id="btn_search"><i class="bi bi-search"></i> Search</button>
+                  <button class="btn btn-danger btn-sm btn_hidden" id="btn_reset"><i class="bi bi-reset"></i> Reset</button>
                 </div>
             </div>
           </div>
-        </form>
-        <!-- form end -->
       </div>
       <!-- table -->
       <div class="container-fluid" style="overflow: scroll;">
@@ -181,9 +181,8 @@
               <th>D.Date</th>
             </tr>
           </thead>
-          <!-- <tbody id="tb_search"></tbody> -->
           <!-- table body normal with pagination -->
-          <tbody>
+          <tbody id="tb_search">
             <?php
 
                 $num_per_page = 10;
@@ -249,7 +248,7 @@
         // echo $tot_records." ".$tot_page;
 
       ?>
-      <center>
+      <div id="page_pagination">
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             <?php 
@@ -284,7 +283,7 @@
             ?>
           </ul>
         </nav>
-      </center>
+      </div>
     </div>
   </div>
 </div>
@@ -319,35 +318,8 @@
 </div>
 <!-- modal end -->
 
-<!-- <div id="tb_search"></div> -->
-
 <!-- js -->
 <script type="text/javascript" src="js/custom_javascript.js"></script>
-
-<script type="text/javascript">
-  
-  $(document).on('click','#btn_search',function(){
-
-    var locationid = document.getElementById('LocationSelect').value;
-    var coreno = document.getElementById('CoreNo').value;
-    var color = document.querySelector('input[name = "color"]:checked').value;
-
-    //alert(locationid);
-
-    $.ajax({
-      url:'actions/searchtabledata.php',
-      method:'POST',
-      data:{Location_ID:locationid,Core_No:coreno,Color:color},
-      success:function(data){
-        //$('#tb_search').html(data);
-        alert(data);
-      }
-    });
-
-  });
-
-</script>
-
 
 <!-- footer -->
 <?php include 'includes/footer.php' ?>
