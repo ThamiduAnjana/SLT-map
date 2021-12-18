@@ -75,15 +75,13 @@
 	  	</div>
 	</nav>
 	<div class="tab-content" id="nav-tabContent">
-	  	<div class="tab-pane fade show active" id="nav-table" role="tabpanel" aria-labelledby="nav-table-tab">
-	  		<div class="card" style="width: 100%;">
-			  	<div class="card-body">
-			  		<div class="container">
-				        <!-- form -->
-				        <form>
-				          <div class="row">
-				            <!-- input city -->
-				            <div class="col-sm">
+	  <div class="tab-pane fade show active" id="nav-table" role="tabpanel" aria-labelledby="nav-table-tab">
+	  	<div class="card" style="width: 100%;">
+			  <div class="card-body">
+			  	<div class="container">
+				    <div class="row">
+				      <!-- input city -->
+				      <div class="col-sm">
 				                <div class="form-group">
 				                  <label>City</label>
 				                  <select class="form-control form-control-sm" id="CitySelect">
@@ -108,35 +106,37 @@
 
 				                  </select>
 				                </div>
-				            </div>
-				            <!-- input location -->
-				            <div class="col-sm">
+				      </div>
+				      <!-- input location -->
+				      <div class="col-sm">
 				                <div class="form-group">
 				                  <label>Location</label>
 				                  <select class="form-control form-control-sm" id="LocationSelect">
 				                    <option value="0">Select Location</option>
 				                  </select>
 				                </div>
-				            </div>
-				            <!-- input cable size -->
-				            <div class="col-sm">
+				      </div>
+				      <!-- input cable size -->
+				      <div class="col-sm">
 				                <div class="form-group">
 				                  <label>Cable Size</label>
 				                  <!-- <div id="CableSize"></div> -->
 				                  <input type="text" class="form-control form-control-sm" id="CableSize" placeholder="0" disabled>
 				                </div>
-				            </div>
-				            <!-- input core no -->
-				            <div class="col-sm">
+				      </div>
+				      <!-- input core no -->
+				      <div class="col-sm">
 				                <div class="form-group">
 				                  <label>Core No</label>
 				                  <input type="number" class="form-control form-control-sm" id="CoreNo" placeholder="1" max="0" min="1">
 				                </div>
-				            </div>
-				            <!-- input color -->
-				            <div class="col-sm">
+				      </div>
+				      <!-- input color -->
+				      <div class="col-sm">
 				                <div class="form-group">
 				                  <label for="exampleFormControlInput1">Color Size</label>
+				                  <!-- form -->
+				        					<form>
 				                    <table>
 				                        <tr>
 				                          <td><input type="radio" name="color" value="#3498DB" /></td>
@@ -161,18 +161,20 @@
 				                          </tr>
 				                        </tbody>
 				                      </table>
+				                  </form>
+				        					<!-- form end -->
 				                </div>
-				            </div>
-				            <!-- button search -->
-				            <div class="col-sm">
-				                <div class="form-group">
-				                  <label>Action</label><br>
-				                  <button type="submit" class="btn btn-primary" id="btn_submit"><i class="bi bi-search"></i> Search</button>
-				                </div>
-				            </div>
-				          </div>
-				        </form>
-				        <!-- form end -->
+				      </div>
+				      <!-- button search -->
+				      <div class="col-sm">
+				        <div class="form-group">
+				          <label>Action</label><br>
+				          <button class="btn btn-primary btn-sm" id="btn_Dsearch"><i class="bi bi-search"></i> Search</button>
+                  <button class="btn btn-danger btn-sm btn_hidden" id="btn_Dreset"><i class="bi bi-reset"></i> Reset</button>
+				        </div>
+				      </div>
+				    </div>
+				        
 				      </div>
 			  		<!-- table -->
 				    <div class="container-fluid" style="overflow: scroll;">
@@ -192,60 +194,60 @@
 				          <th>D.Date</th>
 				          <th bgcolor="#5DADE2" width="125px">Actions</th>
 				        </tr>
-				        <tbody>
-				        <?php
+				        <tbody id="tb_search">
+					        <?php
 
-				        	$num_per_page = 10;
-	                $start_from = ($page - 1)*10;
-	                // echo $start_from." ".$num_per_page;
+					        	$num_per_page = 10;
+		                $start_from = ($page - 1)*10;
+		                // echo $start_from." ".$num_per_page;
 
-				          //first query (that you want to select)
-				          $query_three = "SELECT * FROM tb_sender limit $start_from,$num_per_page;";
-				          //query execute
-				          $result = mysqli_query($conn, $query_three);
-				          //Add while loop for first column data display and after display next column
-				          while ($row = mysqli_fetch_array($result)) {
-				            //data
-				            $ID = $row['ID'];
-				            $S_Date = $row["Date"];
-				            $S_Core_No = $row["Core_No"];
-				            $S_Distination = $row["Distination"];
-										$S_Loss = $row["Loss"];
-										$S_Status = $row["Status"];
-										$S_CoreColor = $row['CoreColor'];
-										$S_Remarks = $row["Remarks"];
-										$D_Remarks = $row["D_Remarks"];
-										$D_Status = $row["D_Status"];
-										$D_CoreColor = $row['D_CoreColor'];
-										$D_Loss = $row["D_Loss"];
-										$D_Distination = $row["D_Distination"];
-										$D_Core_NO = $row["D_Core_NO"];
-										$D_Date = $row["D_Date"];
-
-										//Get Location ID
-										$Get_LocationId = $row['LocationID'];// Location ID *
-
-										//Find Location name
-					          $query_location = "SELECT * FROM tb_locations WHERE LocationID = $Get_LocationId;";
+					          //first query (that you want to select)
+					          $query_three = "SELECT * FROM tb_sender limit $start_from,$num_per_page;";
 					          //query execute
-					          $L_result = mysqli_query($conn, $query_location);
-					          //get Data
-					          $L_row = mysqli_fetch_array($L_result);
-					          //data
-					          $GetLocation_Name = $L_row['Location'];// Location Name *
-					          //Get City ID
-					          $GetCity_ID = $L_row['CityID'];// City ID *
+					          $result = mysqli_query($conn, $query_three);
+					          //Add while loop for first column data display and after display next column
+					          while ($row = mysqli_fetch_array($result)) {
+					            //data
+					            $ID = $row['ID'];
+					            $S_Date = $row["Date"];
+					            $S_Core_No = $row["Core_No"];
+					            $S_Distination = $row["Distination"];
+											$S_Loss = $row["Loss"];
+											$S_Status = $row["Status"];
+											$S_CoreColor = $row['CoreColor'];
+											$S_Remarks = $row["Remarks"];
+											$D_Remarks = $row["D_Remarks"];
+											$D_Status = $row["D_Status"];
+											$D_CoreColor = $row['D_CoreColor'];
+											$D_Loss = $row["D_Loss"];
+											$D_Distination = $row["D_Distination"];
+											$D_Core_NO = $row["D_Core_NO"];
+											$D_Date = $row["D_Date"];
 
-					          //Find Location name
-					          $query_city = "SELECT * FROM tb_city WHERE CityId = $GetCity_ID;";
-					          //query execute
-					          $C_result = mysqli_query($conn, $query_city);
-					          //get Data
-					          $C_row = mysqli_fetch_array($C_result);
-					          //data
-					          $GetCity_Name = $C_row['City'];// City Name *
+											//Get Location ID
+											$Get_LocationId = $row['LocationID'];// Location ID *
 
-				        ?>
+											//Find Location name
+						          $query_location = "SELECT * FROM tb_locations WHERE LocationID = $Get_LocationId;";
+						          //query execute
+						          $L_result = mysqli_query($conn, $query_location);
+						          //get Data
+						          $L_row = mysqli_fetch_array($L_result);
+						          //data
+						          //Get City ID
+						          $GetCity_ID = $L_row['CityID'];// Location Name *
+						          $GetLocation_Name = $GetCity_ID." ".$L_row['Location'];// Location Name *
+
+						          //Find Location name
+						          $query_city = "SELECT * FROM tb_city WHERE CityId = $GetCity_ID;";
+						          //query execute
+						          $C_result = mysqli_query($conn, $query_city);
+						          //get Data
+						          $C_row = mysqli_fetch_array($C_result);
+						          //data
+						          $GetCity_Name = $GetCity_ID." ".$C_row['City'];// City Name *
+
+					        ?>
 
 				            <tr>
 					            <td><?= $S_Date ?></td>
@@ -273,14 +275,14 @@
 					            <td><?= $D_Core_NO ?></td>
 					            <td><?= $D_Date ?></td>
 					            <td>
-					              <button type="button" class="btn btn-danger" onclick="DeleteDetails(<?= $ID ?>);"><i class="bi bi-trash-fill"></i></button>
+					              <button class="btn btn-danger" onclick="DeleteDetails(<?= $ID ?>);"><i class="bi bi-trash-fill"></i></button>
 					              &nbsp;
-					              <button type="button" class="btn btn-success" id="btn_Update" 
+					              <button class="btn btn-success" id="btn_Update" 
 					              	onclick="
 					              		UpdateDetails(
 					              			'<?= $ID ?>',
-					              			'<?= $GetCity_ID ?>',
-					              			'<?= $Get_LocationId ?>',
+					              			'<?= $GetCity_Name ?>',
+					              			'<?= $GetLocation_Name ?>',
 					              			'<?= $S_Date ?>',
 					              			'<?= $S_Core_No ?>',
 					              			'<?= $S_Distination ?>',
@@ -301,10 +303,10 @@
 					            </td>
 				            </tr>
 
-				        <?php
-				          }
+					        <?php
+					          }
 
-				        ?>
+					        ?>
 				        </tbody>
 				      </table>
 				    </div>
@@ -323,7 +325,7 @@
 			        // echo $tot_records." ".$tot_page;
 
 			      ?>
-			      <center>
+			      <div id="page_pagination">
 			        <nav aria-label="Page navigation example">
 			          <ul class="pagination">
 			            <?php 
@@ -358,11 +360,11 @@
 			            ?>
 			          </ul>
 			        </nav>
-			      </center>
-			  	</div>
-				</div>
-	  	</div>
-	  	<div class="tab-pane fade" id="nav-AddNewData" role="tabpanel" aria-labelledby="nav-AddNewData-tab">
+			      </div>
+			  </div>
+			</div>
+	  </div>
+	  <div class="tab-pane fade" id="nav-AddNewData" role="tabpanel" aria-labelledby="nav-AddNewData-tab">
 	  		<div class="card" style="width: 100%;">
 			  	<div class="card-body">
 			  		<div class="row">
@@ -517,8 +519,8 @@
 						</form>
 			  	</div>
 				</div>
-	  	</div>
-	  	<div class="tab-pane fade" id="nav-AddNewCity" role="tabpanel" aria-labelledby="nav-AddNewCity-tab">
+	  </div>
+	  <div class="tab-pane fade" id="nav-AddNewCity" role="tabpanel" aria-labelledby="nav-AddNewCity-tab">
 	  		<div class="card" style="width: 100%;">
 	  			<br>
 	  			<div class="container-fluid">
@@ -610,7 +612,7 @@
 	  				</div>
 	  			</div>
 	  		</div>
-	  	</div>
+	  </div>
 	</div>
 </div>
 <!-- tab end -->
@@ -632,36 +634,13 @@
 			  		<div class="col-sm">
 				  		<div class="form-group">
 					      <label>City</label>
-					      <select class="form-control form-control-sm" id="M_inputCitySelect">
-					        <option>Select City</option>
-					        <?php
-
-					          //first query (that you want to select)
-					          $query_one = "SELECT * FROM tb_city;";
-					          //query execute
-					          $result = mysqli_query($conn, $query_one);
-					          //Add while loop for first column data display and after display next column
-					          while ($row = mysqli_fetch_array($result)) {
-					            //data
-					        ?>
-
-					          	<option value="<?= $row['CityId'] ?>"><?php echo $row["CityId"], " | ", $row["City"]; ?></option>
-
-					        <?php
-
-					          }
-
-					        ?>
-
-					      </select>
+					      <input type="text" class="form-control" name="M_inputCitySelect" id="M_inputCitySelect" placeholder="Enter City" disabled>
 					    </div>
 			  		</div>
 			  		<div class="col-sm">
 				      <div class="form-group">
 				        <label>Location</label>
-				        <select class="form-control form-control-sm" name="M_inputLocationSelect" id="M_inputLocationSelect">
-				          <option>Select Location</option>
-				        </select>
+				        <input type="text" class="form-control" name="M_inputLocationSelect" id="M_inputLocationSelect" placeholder="Enter Location" disabled>
 				      </div>
 				    </div>
 			  	</div>
@@ -854,6 +833,34 @@ function DeleteDetails(ID){
 		//code
 	}
 };
+
+$(document).on('click','#btn_Dsearch',function(){
+
+  var locationid = document.getElementById('LocationSelect').value;
+  var coreno = document.getElementById('CoreNo').value;
+  var color = document.querySelector('input[name = "color"]:checked').value;
+
+    //alert(locationid+coreno+color);
+
+  $.ajax({
+    url:'../actions/searchtabledata_dashboard.php',
+    method:'POST',
+    data:{Location_ID:locationid,Core_No:coreno,Color:color},
+    success:function(data){
+      $('#tb_search').html(data);
+      $('#page_pagination').hide();
+      $('#btn_Dreset').show();
+      //alert(data);
+      //console.log(data);
+    }
+
+  });
+
+});
+
+$(document).on('click','#btn_Dreset',function(){
+  window.location.reload(true);
+});
 
 </script>
 
