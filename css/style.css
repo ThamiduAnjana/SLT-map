@@ -16,3 +16,7 @@
 .inputborder-n{
   border-color: #D6DBDF;
 }
+
+.btn_hidden{
+  display: none;
+}
