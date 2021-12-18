@@ -5,7 +5,7 @@
   include 'includes/header.php';
   require_once("db/connection.php");
 
-  // $page = 0;
+  //$page = 1;
 
   if(isset($_GET['page'])){
     $page = $_GET['page'];
@@ -123,7 +123,7 @@
             <!-- input color -->
             <div class="col-sm">
                 <div class="form-group">
-                  <label for="exampleFormControlInput1">Color Size</label>
+                  <label>Color Size</label>
                     <table>
                         <tr>
                           <td><input type="radio" name="color" id="color" value="#3498DB" /></td>
@@ -154,7 +154,8 @@
             <div class="col-sm">
                 <div class="form-group">
                   <label>Action</label><br>
-                  <button type="submit" class="btn btn-primary" id="btn_search"><i class="bi bi-search"></i> Search</button>
+                  <!-- <button class="btn btn-primary" id="btn_search"><i class="bi bi-search"></i> Search</button> -->
+                  <button id="btn_search">search</button>
                 </div>
             </div>
           </div>
@@ -180,15 +181,17 @@
               <th>D.Date</th>
             </tr>
           </thead>
+          <!-- <tbody id="tb_search"></tbody> -->
+          <!-- table body normal with pagination -->
           <tbody>
-              <?php
+            <?php
 
                 $num_per_page = 10;
                 $start_from = ($page - 1)*10;
                 // echo $start_from." ".$num_per_page;
 
                 //three query (that you want to select)
-                $query_three = "SELECT * FROM tb_sender limit $start_from,$num_per_page";
+                $query_three = "SELECT * FROM tb_sender limit $start_from,$num_per_page;";
                 //query execute
                 $resultt = mysqli_query($conn, $query_three);
                 //Add while loop for column data display and after display next column
@@ -227,11 +230,12 @@
                 }
 
               ?>
-            </tbody>
+          </tbody>
         </table>
       </div>
       <!-- table end -->
       <br>
+      <!-- pagination -->
       <?php 
 
         //4 query (that you want to select)
@@ -315,22 +319,35 @@
 </div>
 <!-- modal end -->
 
-<script type="text/javascript">
-  
-$(document).on('click','#btn_search',function(){
-
-  var locationid = document.getElementById('LocationSelect').value;
-  var coreno = document.getElementById('CoreNo').value;
-  var color = document.querySelector('input[name = "color"]:checked');
-
-  alert(color.value+" "+coreno+" "+locationid);
-});
-
-</script>
-
+<!-- <div id="tb_search"></div> -->
 
 <!-- js -->
 <script type="text/javascript" src="js/custom_javascript.js"></script>
+
+<script type="text/javascript">
+  
+  $(document).on('click','#btn_search',function(){
+
+    var locationid = document.getElementById('LocationSelect').value;
+    var coreno = document.getElementById('CoreNo').value;
+    var color = document.querySelector('input[name = "color"]:checked').value;
+
+    //alert(locationid);
+
+    $.ajax({
+      url:'actions/searchtabledata.php',
+      method:'POST',
+      data:{Location_ID:locationid,Core_No:coreno,Color:color},
+      success:function(data){
+        //$('#tb_search').html(data);
+        alert(data);
+      }
+    });
+
+  });
+
+</script>
+
 
 <!-- footer -->
 <?php include 'includes/footer.php' ?>
