@@ -205,7 +205,7 @@
                       <td><?php echo $row["Loss"]; ?></td>
                       <td>
                         <?php echo $row["Status"]; 
-                          if(isset($row['CoreColor'])){
+                          if(isset($row['CoreColor']) And $row['CoreColor'] != "null"){
                             echo "<div class='color-box' style='background-color:".$row['CoreColor']."'></div>";
                           }
                         ?>
@@ -214,7 +214,7 @@
                       <td><?php echo $row["D_Remarks"]; ?></td>
                       <td>
                         <?php echo $row["D_Status"]; 
-                          if(isset($row['D_CoreColor'])){
+                          if(isset($row['D_CoreColor']) And $row['D_CoreColor'] != "null"){
                             echo "<div class='color-box' style='background-color:".$row['D_CoreColor']."'></div>";
                           }
                         ?> 
