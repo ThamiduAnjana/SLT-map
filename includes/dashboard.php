@@ -256,7 +256,7 @@
 					            <td><?= $S_Loss ?></td>
 					            <td>
 	                      <?= $S_Status; 
-	                        if(isset($S_CoreColor)){
+	                        if(isset($S_CoreColor) And $S_CoreColor != "null"){
 	                          echo "<div class='color-box' style='background-color:".$S_CoreColor."'></div>";
 	                        }
 	                      ?>
@@ -265,7 +265,7 @@
 					            <td><?= $D_Remarks ?></td>
 					            <td>
 	                      <?= $D_Status; 
-	                        if(isset($D_CoreColor)){
+	                        if(isset($D_CoreColor) And $D_CoreColor != "null"){
 	                          echo "<div class='color-box' style='background-color:".$D_CoreColor."'></div>";
 	                        }
 	                      ?> 
@@ -445,6 +445,7 @@
   								<div class="form-group">
 	    							<label>CoreColor</label>
 	    							<select class="form-control" name="InputColor" id="InputColor">
+	    								<option value="null">Null</option>
 	      							<option value="#3498DB">Blue</option>
 	      							<option value="#E67E22">Orange</option>
 	      							<option value="#2ECC71">Green</option>
@@ -494,6 +495,7 @@
   								<div class="form-group">
 	    							<label>Des.CoreColor</label>
 	    							<select class="form-control" name="DInputColor" id="DInputColor">
+	    								<option value="null">Null</option>
 	      							<option value="#3498DB">Blue</option>
 	      							<option value="#E67E22">Orange</option>
 	      							<option value="#2ECC71">Green</option>
@@ -681,6 +683,7 @@
   						<div class="form-group">
 	    					<label>CoreColor</label>
 	    					<select class="form-control" name="M_InputColor" id="M_InputColor">
+	    						<option value="null">Null</option>
 	      					<option value="#3498DB">Blue</option>
 	      					<option value="#E67E22">Orange</option>
 	      					<option value="#2ECC71">Green</option>
@@ -727,6 +730,7 @@
   						<div class="form-group">
 	    					<label>Des.CoreColor</label>
 	    					<select class="form-control" name="M_DInputColor" id="M_DInputColor">
+	    						<option value="null">Null</option>
 	      					<option value="#3498DB">Blue</option>
 	      					<option value="#E67E22">Orange</option>
 	      					<option value="#2ECC71">Green</option>
