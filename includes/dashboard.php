@@ -776,42 +776,25 @@ function UpdateDetails(
 		D_Date
 	){
 
-	 console.log(
-  	ID,
-  	City_Name,
-  	Location_Name,
-  	S_Date,
-  	S_Core_No,
-		S_Distination,
-		S_Loss,
-		S_Status,
-		S_CoreColor,
-		S_Remarks,
-		D_Remarks,
-		D_Status,
-		D_CoreColor,
-		D_Loss,
-		D_Distination,
-		D_Core_NO,
-		D_Date
-  );
+	 // console.log(ID,City_Name,Location_Name,S_Date,S_Core_No,S_Distination,S_Loss,S_Status,S_CoreColor,S_Remarks,D_Remarks,D_Status,D_CoreColor,D_Loss,D_Distination,D_Core_NO,D_Date);
+	 //console.log(ID,S_Date);
 
   $('#UpdateModal').modal('show');
+  $('#inputid').val(ID);
   $('#M_inputCitySelect').val(City_Name);
   $('#M_inputLocationSelect').val(Location_Name);
-  $('#inputid').val(ID);
   $('#M_InputDate').val(S_Date);
   $('#M_InputCore_No').val(S_Core_No);
   $('#M_InputDestination').val(S_Distination);
   $('#M_InputLoss').val(S_Loss);
   $('#M_InputStatus').val(S_Status);
-  if(S_CoreColor !== null){
+  if(S_CoreColor != null){
   	$('#M_InputColor').val(S_CoreColor);
   } 
   $('#M_InputRemarks').val(S_Remarks);
   $('#M_DInputRemarks').val(D_Remarks);
   $('#M_DInputStatus').val(D_Status);
-  if(D_CoreColor !== null){
+  if(D_CoreColor != null){
   	$('#M_DInputColor').val(D_CoreColor);
   }
   $('#M_DInputLoss').val(D_Loss);
@@ -855,7 +838,7 @@ $(document).on('click','#btn_Dsearch',function(){
       $('#page_pagination').hide();
       $('#btn_Dreset').show();
       //alert(data);
-      //console.log(data);
+      console.log(data);
     }
 
   });
