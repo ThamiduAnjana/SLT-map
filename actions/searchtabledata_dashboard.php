@@ -32,31 +32,31 @@
         $D_Core_NO = $row["D_Core_NO"];
         $D_Date = $row["D_Date"];
 
-        $val1 = "<tr>
-                <td>".$S_Date."</td>
-                <td>".$S_Core_No."</td>
-                <td>".$S_Distination."</td>
-                <td>".$S_Loss."</td>
-                <td>".$S_Status;
+        $val1 = '<tr>
+                <td>'.$S_Date.'</td>
+                <td>'.$S_Core_No.'</td>
+                <td>'.$S_Distination.'</td>
+                <td>'.$S_Loss.'</td>
+                <td>'.$S_Status;
 
         if(isset($S_CoreColor)){
-            $val1 .= "<div class='color-box' style='background-color:".$S_CoreColor."'></div>";
+            $val1 .= '<div class="color-box" style="background-color:'.$S_CoreColor.'"></div>';
         };
 
-        $val1 .= "</td>
-                <td>".$S_Remarks."</td>
-                <td>".$D_Remarks."</td>
-                <td>".$D_Status;
+        $val1 .= '</td>
+                <td>'.$S_Remarks.'</td>
+                <td>'.$D_Remarks.'</td>
+                <td>'.$D_Status;
 
         if(isset($D_CoreColor)){
-            $val1 .= "<div class='color-box' style='background-color:".$D_CoreColor."'></div>";
+            $val1 .= '<div class="color-box" style="background-color:'.$D_CoreColor.'"></div>';
         };  
 
-        $val1 .= "</td>
-                <td>".$D_Loss."</td>
-                <td>".$D_Distination."</td>
-                <td>".$D_Core_NO."</td>
-                <td>".$D_Date."</td>";
+        $val1 .= '</td>
+                <td>'.$D_Loss.'</td>
+                <td>'.$D_Distination.'</td>
+                <td>'.$D_Core_NO.'</td>
+                <td>'.$D_Date.'</td>';
 
         //Get Location ID
         $Get_LocationId = $Location_ID;// Location ID *
@@ -81,35 +81,16 @@
         //data
         $GetCity_Name = $GetCity_ID." ".$C_row['City'];// City Name *
 
+        $UpdateValue = "'".$ID."','".$GetCity_Name."','".$GetLocation_Name."','".$S_Date."','".$S_Core_No."','".$S_Distination."','".$S_Loss."','".$S_Status."','".$S_CoreColor."','".$S_Remarks."','".$D_Remarks."','".$D_Status."','".$D_CoreColor."','".$D_Loss."','".$D_Distination."','".$D_Core_NO."','".$D_Date."'";
 
-        $val1 .= "<td>
-                <button type='button' class='btn btn-danger' onclick='DeleteDetails(".$ID.");'><i class='bi bi-trash-fill'></i></button>
-                &nbsp;
-                <button type='button' class='btn btn-success' id='btn_Update' 
-                    onclick='
-                        UpdateDetails(
-                            ".$ID.",
-                            ".$GetCity_Name.",
-                            ".$GetLocation_Name.",
-                            ".$S_Date.",
-                            ".$S_Core_No.",
-                            ".$S_Distination.",
-                            ".$S_Loss.",
-                            ".$S_Status.",
-                            ".$S_CoreColor.",
-                            ".$S_Remarks.",
-                            ".$D_Remarks.",
-                            ".$D_Status.",
-                            ".$D_CoreColor.",
-                            ".$D_Loss.",
-                            ".$D_Distination.",
-                            ".$D_Core_NO.",
-                            ".$D_Date."
-                        );'>
-                    <i class='bi bi-arrow-counterclockwise'></i>
-                </button>
+        $val1 .= '<td>
+                    <button type="button" class="btn btn-danger" onclick="DeleteDetails('.$ID.');"><i class="bi bi-trash-fill"></i></button>
+                    &nbsp;
+                    <button type="button" class="btn btn-success" id="btn_Update" onclick="UpdateDetails('.$UpdateValue.');">
+                        <i class="bi bi-arrow-counterclockwise"></i>
+                    </button>
                 </td>
-                </tr>";
+                </tr>';
 
         echo $val1;
 
