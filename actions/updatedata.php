@@ -70,7 +70,7 @@
 		header('location: ../includes/dashboard.php');
 	}else{
 		//first query (that you want to select)
-	    $query_one = "update tb_sender set Date='".$S_Date."',Core_No=".$S_Core_No.",Distination=".$S_Distination.",Loss=".$S_Loss.",Status='".$S_Status."',Remarks='".$S_Remarks."',CoreColor='".$S_CoreColor."',D_Date='".$D_Date."',D_Core_NO=".$D_Core_NO.",D_Distination=".$D_Distination.",D_Loss=".$D_Loss.",D_Status='".$D_Status."',D_Remarks='".$D_Remarks."',D_CoreColor='".$D_CoreColor."' where ID = ".$ID.";";
+	    $query_one = "update tb_sender set Date='".$S_Date."',Core_No=".$S_Core_No.",Distination=".$S_Distination.",Loss=".$S_Loss.",Status='".$S_Status."',Remarks='".$S_Remarks."',CoreColor='".$S_CoreColor."',D_Date='".$D_Date."',D_Core_NO=".$D_Core_NO.",D_Distination=".$D_Distination.",D_Loss=".$D_Loss.",D_Status='".$D_Status."',D_Remarks='".$D_Remarks."',D_CoreColor='".$D_CoreColor."' where ID = ".$ID;
 	    //query execute
 	    //echo $query_one;
 	    if(mysqli_query($conn, $query_one)){
