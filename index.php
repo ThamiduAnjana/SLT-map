@@ -55,7 +55,7 @@
 
 <!-- google map -->
 <center>
-  <!-- <iframe src="https://www.google.com/maps/d/embed?mid=18ZUMdmSLrSvO11T4ays8QK3_Z26GjHgs" width="99%" height="400"></iframe> -->
+  <iframe src="https://www.google.com/maps/d/embed?mid=18ZUMdmSLrSvO11T4ays8QK3_Z26GjHgs" width="99%" height="400"></iframe>
 </center>
 <!-- google map end -->
 
